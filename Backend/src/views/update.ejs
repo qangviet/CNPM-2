@@ -1,0 +1,56 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Update A User</title>
+        <link rel="stylesheet" href="/css/navbar.css" />
+    </head>
+    <body>
+        <div class="topnav">
+            <a href="/">Home</a>
+            <a href="/news">News</a>
+            <a href="/contact">Contact</a>
+            <a href="/about">About</a>
+        </div>
+        <div class="form-add-new">
+            <form action="/" , method="post">
+                <fieldset>
+                    <legend>Update a user:</legend>
+                    <div class="input-group">
+                        <label>Họ tên:</label>
+                        <input
+                            type="text"
+                            name="Hoten"
+                            value="<%= user[0].Hoten %>"
+                        />
+                    </div>
+                    <div class="input-group">
+                        <label>SĐT:</label>
+                        <input
+                            type="text"
+                            name="SDT"
+                            value="<%= user[0].SDT %>"
+                        />
+                    </div>
+                    <div class="input-group">
+                        <label>Địa chỉ:</label>
+                        <input
+                            type="text"
+                            name="Diachi"
+                            value="<%= user[0].Diachi %>"
+                        />
+                    </div>
+                    <div class="input-group">
+                        <label>CCCD: </label>
+                        <input
+                            type="text"
+                            name="CCCD"
+                            value="<%= user[0].CCCD %>"
+                        />
+                    </div>
+                    <button class="btn-add">Save</button>
+                </fieldset>
+            </form>
+        </div>
+    </body>
+</html>
