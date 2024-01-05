@@ -1,0 +1,72 @@
+.employ-viewdetails {
+    text-decoration: underline;
+    color: rgb(26, 75, 155);
+}
+.employ-viewdetails:hover {
+    cursor: pointer;
+}
+
+.employee-container-modal {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+.modal-content-divider {
+    width: 2px;
+    background-color: #33333335;
+}
+.modal-content {
+    .left {
+    }
+    .right {
+    }
+}
+.employee-element-form {
+    display: flex;
+    h4 {
+        width: 130px;
+        height: 35px;
+        padding: 2px;
+        margin: auto;
+    }
+    p {
+        width: 300px;
+        margin: auto;
+        height: 35px;
+        padding: 2px;
+    }
+}
+.emloyee-container-btn {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+.employee-btn-confirm {
+    border-radius: 10px;
+    background-color: rgb(30, 200, 30);
+    border: none;
+    padding: 6px 15px;
+    color: #fff;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    :hover {
+        background-color: rgba(77, 234, 77, 0.272);
+    }
+}
+
+.employee-btn-confirm:hover {
+    background-color: #1ad639a5;
+}
+
+.employee-btn-decline {
+    border-radius: 10px;
+    background-color: rgb(200, 42, 21);
+    border: none;
+    color: #fff;
+    padding: 6px 15px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+.employee-btn-decline:hover {
+    background-color: rgba(201, 71, 71, 0.514);
+}

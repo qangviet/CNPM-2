@@ -1,0 +1,91 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.registerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-image: url("https://th.bing.com/th/id/R.9ea8dea5aa7f9acf6f01172999b2009a?rik=aM5RvydZFo5UiQ&riu=http%3a%2f%2fwallpapercave.com%2fwp%2fwp1846089.jpg&ehk=dXqZrmErYGxl9tVR75%2bUNA2H5eH3IeQW5DqXIFN9lVg%3d&risl=&pid=ImgRaw&r=0");
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+}
+
+.welcomeMessage {
+    width: 40%;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    margin-right: 20px;
+}
+
+.welcomeMessage h2 {
+    font-size: 48px; /* Increased font size */
+    margin-bottom: 5px;
+    color: #30475e;
+}
+
+.welcomeMessage h3 {
+    font-size: 32px; /* Increased font size */
+    margin-bottom: 10px;
+    color: #30475e;
+}
+
+.welcomeMessage p {
+    font-size: 20px; /* Increased font size */
+    line-height: 1.6;
+    color: #333;
+}
+
+.registerForm {
+    width: 40%;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.registerTitle {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #30475e;
+}
+
+.registerInputs {
+    display: flex;
+    flex-direction: column;
+}
+
+.registerInput {
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.registerInput:focus {
+    outline: none;
+    border-color: #30475e;
+    box-shadow: 0 0 5px rgba(48, 71, 94, 0.5);
+}
+
+.registerButton {
+    cursor: pointer;
+    background-color: #30475e;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.registerButton:hover {
+    background-color: #243447;
+}

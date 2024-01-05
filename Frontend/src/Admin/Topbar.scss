@@ -1,0 +1,18 @@
+.ad-topbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    padding: 10px;
+    img {
+        height: 50px;
+        width: 50px;
+    }
+}
+.ad-logout {
+    text-decoration: underline;
+    color: blue;
+}
+.ad-logout:hover {
+    cursor: pointer;
+}

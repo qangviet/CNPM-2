@@ -1,0 +1,33 @@
+/* header.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+.header {
+    position: relative;
+}
+
+.headerImg {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.overlayText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    color: #000; /* Change text color to black */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.overlayText span {
+    display: block;
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 1.2;
+}

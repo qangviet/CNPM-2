@@ -1,0 +1,43 @@
+.btn-blue {
+    margin-left: 50px;
+    color: white;
+    background-color: rgb(66, 124, 194);
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: none;
+}
+.btn-blue:hover {
+    background-color: rgba(16, 77, 167, 0.605);
+    cursor: pointer;
+}
+.user-btn-red-undeline {
+    text-decoration: underline;
+    color: rgb(252, 38, 38);
+}
+.user-btn-red-undeline:hover {
+    cursor: pointer;
+}
+.user-btn-undefine {
+    text-decoration: underline;
+    color: rgba(252, 38, 38, 0.506);
+}
+.payment-container-btn {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 25px;
+    padding: 5px;
+    button {
+        text-decoration: none;
+        border: none;
+        background-color: #1ec837;
+        color: #fff;
+        padding: 10px;
+        border-radius: 15px;
+        font-size: 16px;
+    }
+    button:hover {
+        background-color: #1ec8377c;
+        cursor: pointer;
+    }
+}

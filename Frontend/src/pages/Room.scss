@@ -1,0 +1,177 @@
+.room-container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 35px;
+    margin-left: 35px;
+    gap: 20px;
+}
+
+.room-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 300px;
+    text-align: center;
+}
+
+.room-card img {
+    max-width: 100%;
+    height: auto;
+}
+
+.room-details {
+    margin-top: 10px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+}
+.small-image {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+    display: block;
+    text-align: center;
+}
+.small-image {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+    display: block;
+    text-align: center;
+}
+.modal-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal-buttons button {
+    width: 15%;
+    padding: 8px 12px;
+    font-size: 14px;
+}
+.total-price {
+    margin-top: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff0000;
+}
+.fixed-box-text {
+    width: 650px; /* Định dạng kích thước của vùng cố định */
+    border: 0px; /* Định dạng viền của vùng cố định */
+    overflow: hidden; /* Ẩn các nội dung vượt quá kích thước của vùng */
+    word-wrap: break-word; /* Wrap văn bản khi vượt quá kích thước của vùng */
+}
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.home-button {
+    padding: 10px 20px;
+    background-color: #30475e;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.home-button:hover {
+    background-color: #273849;
+}
+.button-viewdetails {
+    margin-top: 15px;
+    background-color: #0a6bff;
+    width: 120px;
+    height: 30px;
+    font-size: 16px;
+    font-weight: 300;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.button-viewdetails:hover {
+    background-color: rgba(0, 0, 255, 0.349);
+    transform: translateY(-2px);
+    cursor: pointer;
+}
+.btn-book {
+    margin-top: 15px;
+    background-color: #0ec022;
+    width: 120px;
+    height: 30px;
+    font-size: 16px;
+    font-weight: 300;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.btn-book:hover {
+    background-color: rgba(0, 255, 64, 0.349);
+    transform: translateY(-2px);
+    cursor: pointer;
+}
+.btn-close {
+    margin-top: 15px;
+    background-color: #be3009;
+    width: 120px;
+    height: 30px;
+    font-size: 16px;
+    font-weight: 300;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.btn-close:hover {
+    background-color: rgba(245, 6, 6, 0.253);
+    transform: translateY(-2px);
+    cursor: pointer;
+}
+
+.search-bar-container {
+    width: 100vw;
+    display: flex;
+    flex-direction: row;
+    margin: 8px auto;
+    justify-content: center;
+}
+
+.search-bar {
+    margin-bottom: 10px;
+    div {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        label {
+            color: rgb(30, 30, 30);
+            font-weight: bold;
+        }
+        input {
+            width: 250px;
+            padding: 10px;
+            font-size: 17px;
+            margin: 10px 0px;
+            border: 1px solid #ccc;
+        }
+    }
+    display: flex;
+}
+
+.search-icon {
+    margin-top: 28px;
+    width: 32px;
+    height: 32px;
+    background-color: rgb(87, 131, 218);
+    padding: 6px;
+}
+.search-icon:hover {
+    background-color: rgb(87, 131, 218, 0.7);
+    cursor: pointer;
+}

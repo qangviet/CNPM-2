@@ -1,0 +1,184 @@
+.ad-header-mngroom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    h3 {
+        margin: 3px;
+        font-size: 22px;
+        padding: 5px;
+    }
+    h4 {
+        margin: 7px;
+        font-size: 18px;
+    }
+}
+.search {
+    width: 100%;
+    position: relative;
+    display: flex;
+}
+
+.searchTerm {
+    width: 80%;
+    border: 1px solid #848888;
+    border-right: none;
+    padding: 5px;
+    height: 20px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #9dbfaf;
+}
+
+.searchTerm:focus {
+    color: #000000;
+}
+
+.searchButton {
+    width: 40px;
+    height: 32px;
+    border: 1px solid #00b4cc;
+    background: #00b4cc;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.ad-wrap-container {
+    display: flex;
+    flex-direction: row;
+    width: 30%;
+}
+.btn-ad-create {
+    width: 100px;
+    height: 32px;
+    border-radius: 5px;
+    border: solid 1px;
+}
+.btn-ad-create:hover {
+    cursor: pointer;
+}
+
+.ad-table-room {
+    margin: 20px;
+}
+.title-table {
+    margin: 10px;
+    font: bold 20px Arial, sans-serif;
+}
+.zui-table {
+    border: solid 1px #ddeeee;
+    border-collapse: collapse;
+    border-spacing: 0;
+    // font: normal 16px Arial, sans-serif;
+    padding: 10px;
+    width: 100%;
+}
+.zui-table thead th {
+    background-color: #f3f3f36b;
+    border: none;
+    color: #03192a;
+    padding: 10px 25px 10px 10px;
+    text-align: left;
+    text-shadow: 1px 1px 1px #fff;
+}
+.zui-table tbody td {
+    border: solid 1px #ddeeee;
+    color: #333;
+    padding: 10px 25px 10px 10px;
+    text-shadow: 1px 1px 1px #fff;
+    .green {
+        color: green;
+    }
+}
+.zui-table-highlight tbody tr:hover {
+    background-color: #b7b7b72a;
+}
+.zui-table-horizontal tbody td {
+    border-left: none;
+    border-right: none;
+}
+
+.ad-btn-action {
+    padding: 4px;
+    margin-left: 10px;
+    background-color: #ffffff;
+    border: none;
+}
+.ad-btn-action :hover {
+    cursor: pointer;
+}
+.ad-btn-viewdetails {
+    border: none;
+    text-decoration: underline;
+    color: rgba(18, 115, 212, 0.947);
+    :hover {
+        cursor: pointer;
+    }
+}
+.ad-btn-viewdetails:hover {
+    cursor: pointer;
+}
+.element-form {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    margin: 10px;
+    label {
+        width: 150px;
+        padding: 10px;
+    }
+    input {
+        width: 450px;
+        font-size: 15px;
+    }
+    textarea {
+        width: 450px;
+        height: 150px;
+        font-size: 15px;
+        font-family: sans-serif;
+    }
+}
+
+.btn-create {
+    margin-top: 15px;
+    background-color: #0ec022;
+    width: 100px;
+    height: 30px;
+    font-size: 16px;
+    font-weight: 300;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.btn-create:hover {
+    background-color: rgba(0, 255, 64, 0.349);
+    transform: translateY(-2px);
+    cursor: pointer;
+}
+.btn-close {
+    margin-top: 15px;
+    background-color: #be3009;
+    width: 100px;
+    height: 30px;
+    font-size: 16px;
+    font-weight: 300;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    transition: all 0.2s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.btn-close:hover {
+    background-color: rgba(245, 6, 6, 0.253);
+    transform: translateY(-2px);
+    cursor: pointer;
+}
+.td-wraptext {
+    overflow-wrap: break-word;
+    -break: break-word;
+
+    max-width: 400px !important;
+}
