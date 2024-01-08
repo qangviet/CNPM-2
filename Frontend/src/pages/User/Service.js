@@ -56,13 +56,37 @@ const Service = () => {
             return `${dd}-${mm}-${yyyy}`;
         };
         const getDatesArray = (date1, date2) => {
-            let startDate = new Date(date1);
-            let endDate = new Date(date2);
-            let dateArray = [];
-            for (let dt = startDate; dt <= endDate; dt.setDate(dt.getDate() + 1)) {
-                dateArray.push(convertDate(new Date(dt)));
+            // Tạo đối tượng Date từ xâu ngày
+            const startDate = new Date(date1);
+            const endDate = new Date(date2);
+
+            // Lấy ngày đầu tiên của khoảng
+            const firstDay = new Date(
+                startDate.getFullYear(),
+                startDate.getMonth(),
+                startDate.getDate()
+            );
+
+            // Lấy ngày cuối cùng của khoảng
+            const lastDay = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
+
+            // Tạo danh sách ngày
+            const days = [];
+            for (let day = firstDay; day <= lastDay; day.setDate(day.getDate() + 1)) {
+                // Lấy ngày theo định dạng "dd-mm-yyyy"
+                let d;
+                let m;
+                if (day.getDate() < 10) {
+                    d = `0${day.getDate()}`;
+                } else d = `${day.getDate()}`;
+                if (day.getMonth() + 1 < 10) {
+                    m = `0${day.getMonth() + 1}`;
+                } else m = `${day.getMonth() + 1}`;
+                let y = `${day.getFullYear()}`;
+                // const str = `${day.getDay()}-${day.getMonth()-d}`
+                days.push(d + "-" + m + "-" + y);
             }
-            return dateArray;
+            return days;
         };
 
         let acc = JSON.parse(sessionStorage.getItem("account"));
@@ -107,7 +131,7 @@ const Service = () => {
             return;
         }
         let acc = JSON.parse(sessionStorage.getItem("account"));
-        let response = await axios.post("http://localhost:8088/api/book-service/book", {
+        let res1 = await axios.post("http://localhost:8088/api/book-service/book", {
             id,
             quantity,
             time,
@@ -115,11 +139,18 @@ const Service = () => {
             khID: acc.token,
             totalPrice: price * quantity,
         });
-        if (response.data.EC === "0") {
-            toast.success(response.data.EM);
+        let res2 = await axios.post("http://localhost:8088/api/payment/create-bill-service", {
+            shID: res1.data.DT.shID,
+            khID: acc.token,
+            total: price * quantity,
+        });
+        if (res1.data.EC === "0" && res2.data.EC === "0") {
+            toast.success(res1.data.EM);
             closeModalBook();
+        } else if (res1.data.EC !== "0") {
+            toast.error(res1.data.EM);
         } else {
-            toast.error(response.data.EM);
+            toast.error(res2.data.EM);
         }
     };
 

@@ -20,6 +20,9 @@ export default function TopbarGuest() {
                         <Link to="/rooms">ROOMS</Link>
                     </li>
                     <li className="topListItem">
+                        <Link to="/feedback">FEEDBACK</Link>
+                    </li>
+                    <li className="topListItem">
                         <Link to="/login">Login</Link>
                     </li>
                     <li className="topListItem">

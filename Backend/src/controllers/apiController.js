@@ -9,7 +9,7 @@ import {
 } from "../services/BookRoom";
 import { createRoom, readRoom, deleteRoom, updateRoom } from "../services/CRUDRoom";
 
-import { userInfo, editProfile } from "../services/EditProfile";
+import { userInfo, editProfile, changePassword } from "../services/EditProfile";
 
 import { readService, createService, deleteService, updateService } from "../services/CRUDService";
 import sharp from "sharp";
@@ -308,6 +308,24 @@ const handleEditProfile = async (req, res) => {
     }
 };
 
+const handleChangePassword = async (req, res) => {
+    try {
+        let data = await changePassword(req.body);
+        return res.status(200).json({
+            EM: data.EM,
+            EC: data.EC,
+            DT: data.DT,
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            EM: "error from server",
+            EC: "-1",
+            DT: "",
+        });
+    }
+};
+
 const getBookHistory = async (req, res) => {
     try {
         let data = await bookHistory(req.body);
@@ -412,6 +430,7 @@ module.exports = {
     handleConfirmBook,
     handleDeclineBook,
     getUserInfo,
+    handleChangePassword,
     handleEditProfile,
     getBookHistory,
     getServiceData,

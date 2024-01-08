@@ -6,6 +6,7 @@ import Login from "../pages/login/Login";
 import Register from "../pages/register/Register";
 import Topbar from "../topbar/topbar";
 import NotFound from "../NotFound/NotFound";
+import Feedback from "../pages/Feedback/Feedback";
 const GuestRoutes = () => {
     return (
         <Router>
@@ -15,6 +16,7 @@ const GuestRoutes = () => {
                 <Route path="/rooms" element={<Rooms />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />{" "}
+                <Route path="/feedback" element={<Feedback />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </Router>

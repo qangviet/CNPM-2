@@ -5,6 +5,7 @@ import UserProfile from "../pages/User/UserProfile";
 import Facility from "../pages/Facilities";
 import Topbar from "../topbar/topbar";
 import NotFound from "../NotFound/NotFound";
+import Feedback from "../pages/Feedback/Feedback";
 const UserRoutes = (props) => {
     return (
         <Router>
@@ -14,6 +15,7 @@ const UserRoutes = (props) => {
                 <Route path="/rooms" element={<Rooms />} />
                 <Route path="/profile" element={<UserProfile />} />
                 <Route path="/services" element={<Facility />} />
+                <Route path="/feedback" element={<Feedback />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </Router>

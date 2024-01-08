@@ -13,9 +13,10 @@ const emptyRoom = async (data) => {
             `select * from room
             where ROOM_ID not in (
                 select ROOM_ID from reservation
-                where (CheckInDate <= ? and ? >= CheckOutDate)
-                    or(CheckInDate <= ? and ? >= CheckOutDate))`,
-            [data.checkIn, data.checkIn, data.checkOut, data.checkOut]
+                where ((? <= CheckInDate AND CheckInDate <= ?) 
+                       or(? <= CheckOutDate and CheckOutDate <= ?))
+            	AND RESERVATION_STATUS in (0, 1))`,
+            [data.checkIn, data.checkOut, data.checkIn, data.checkOut]
         );
         return {
             EM: "Thành công !",
@@ -77,7 +78,7 @@ const bookData = async () => {
                     name: r.KH_NAME,
                     phone: r.KH_SDT,
                     address: r.KH_ADDRESS,
-                    gender: r.KH_GIOITING,
+                    gender: r.KH_GIOITINH,
                     cccd: r.KH_CCCD,
                 },
                 roomInfo: {

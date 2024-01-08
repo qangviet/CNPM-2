@@ -1,0 +1,86 @@
+.fb-container {
+    margin: 10px;
+}
+.avg-rate {
+    font-size: 32px;
+    color: red;
+    font-weight: bold;
+}
+.rate-slider {
+    width: 300px;
+    height: 10px;
+    border-radius: 15px;
+    border: 1px solid #000000;
+    // background-color: rgb(207, 37, 37);
+}
+.fb-rate-container {
+    margin: 15px;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 250px;
+    .avg-rate-container {
+        text-align: center;
+    }
+    .fb-rate-star {
+        div {
+            margin-top: 8px;
+            display: flex;
+            flex-direction: row;
+            p {
+                padding: 4px 5px;
+                margin-top: 3px;
+            }
+            img {
+                width: 16px;
+                height: 16px;
+                margin-top: 3px;
+                padding: 2px 4px;
+            }
+        }
+    }
+}
+.btn-write-feedback {
+    align-items: center;
+    background-clip: padding-box;
+    background-color: #fa6400;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font-family: system-ui, -apple-system, system-ui, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    justify-content: center;
+    line-height: 1.25;
+    margin: 0;
+    min-height: 3rem;
+    padding: calc(0.875rem - 1px) calc(1.5rem - 1px);
+    position: relative;
+    text-decoration: none;
+    transition: all 250ms;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: baseline;
+    width: auto;
+}
+
+.btn-write-feedback:hover,
+.btn-write-feedback:focus {
+    background-color: #fb8332;
+    box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.btn-write-feedback:hover {
+    transform: translateY(-1px);
+}
+
+.btn-write-feedback:active {
+    background-color: #c85000;
+    box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+    transform: translateY(0);
+}

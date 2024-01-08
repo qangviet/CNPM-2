@@ -48,7 +48,7 @@ const bookService = async (data) => {
     try {
         let id = generateID();
         await connection.query(
-            `insert into service_history values
+            `insert into service_history (SH_ID, KH_ID, SERVICE_ID, QUANTITY, DATE, TIME, TOTAL_PRICE, STATUS) values
             (?, ?, ?, ?, ?, ?, ?, ?)`,
             [
                 id,
@@ -64,7 +64,7 @@ const bookService = async (data) => {
         return {
             EM: "Đặt dịch vụ thành công!",
             EC: "0",
-            DT: "",
+            DT: { shID: id },
         };
     } catch (error) {
         console.log(error);

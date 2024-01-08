@@ -34,6 +34,15 @@ const ConfirmBook = () => {
             return `${hours}:${minutes}:${seconds} ${day}-${month}-${year}`;
         };
 
+        const calculateTotalPrice = (checkIn, checkOut, roomPrice) => {
+            const startDate = new Date(checkIn);
+            const endDate = new Date(checkOut);
+            const timeDifference = endDate.getTime() - startDate.getTime();
+            const duration = Math.ceil(timeDifference / (1000 * 3600 * 24));
+            const totalPrice = duration * roomPrice;
+            return totalPrice;
+        };
+
         const getReservationData = async () => {
             await axios
                 .get("http://localhost:8088/api/book-data")
@@ -44,14 +53,31 @@ const ConfirmBook = () => {
                     } else if (response.data.EC === "0") {
                         let rdata = [];
                         for (const r of response.data.DT) {
+                            let total = calculateTotalPrice(
+                                r.checkIn,
+                                r.checkOut,
+                                r.roomInfo.price
+                            );
+                            let gender;
+                            if (r.userInfo.gender === 0) {
+                                gender = "Nam";
+                            } else if (r.userInfo.gender === 1) {
+                                gender = "Nữ";
+                            } else {
+                                gender = "Khác";
+                            }
                             rdata.push({
                                 id: r.bookId,
                                 checkIn: convertDate(r.checkIn),
                                 checkOut: convertDate(r.checkOut),
                                 createAt: convertDate2(r.createAt),
                                 room: r.roomInfo,
-                                user: r.userInfo,
+                                user: {
+                                    ...r.userInfo,
+                                    gender,
+                                },
                                 status: "Đang chờ xử lý",
+                                total,
                             });
                         }
                         setReservationData(rdata);
@@ -80,6 +106,7 @@ const ConfirmBook = () => {
 
     const [checkIn, setCheckIn] = useState("");
     const [checkOut, setCheckOut] = useState("");
+    const [total, setTotal] = useState(0);
 
     const [bookSelected, setBookSelected] = useState(-1);
 
@@ -89,6 +116,7 @@ const ConfirmBook = () => {
         setRoomInfo(reservationData[index].room);
         setCheckIn(reservationData[index].checkIn);
         setCheckOut(reservationData[index].checkOut);
+        setTotal(reservationData[index].total);
         setModalViewDetails(true);
     };
     const closeViewDetails = () => {
@@ -97,30 +125,40 @@ const ConfirmBook = () => {
         setRoomInfo({});
         setCheckIn("");
         setCheckOut("");
+        setTotal(0);
         setModalViewDetails(false);
     };
 
     const handleConfirm = async () => {
-        let response = await axios.post("http://localhost:8088/api/confirm-book", {
+        let acc = JSON.parse(sessionStorage.getItem("account"));
+        let res1 = await axios.post("http://localhost:8088/api/confirm-book", {
             id: reservationData[bookSelected].id,
-            nv_id: "19726325",
+            nv_id: acc.token,
         });
-        if (response.data.EC === "0") {
-            toast.success("Xác nhận thành công !");
+        let res2 = await axios.post("http://localhost:8088/api/payment/create-bill-room", {
+            reservationID: reservationData[bookSelected].id,
+            total: reservationData[bookSelected].total,
+            khID: reservationData[bookSelected].user.id,
+        });
+        if (res1.data.EC === "0" && res2.data.EC === "0") {
+            toast.success("Xác nhận thành công!");
             setReservationData((prev) => {
                 prev.splice(bookSelected, 1);
                 return prev;
             });
+        } else if (res1.data.EC !== "0") {
+            toast.error(res1.data.EM);
         } else {
-            toast.error(response.data.EM);
+            toast.error(res2.data.EM);
         }
         closeViewDetails();
     };
 
     const handleDecline = async () => {
+        let acc = JSON.parse(sessionStorage.getItem("account"));
         let response = await axios.post("http://localhost:8088/api/decline-book", {
             id: reservationData[bookSelected].id,
-            nv_id: "19726325",
+            nv_id: acc.token,
         });
         if (response.data.EC === "0") {
             toast.success("Từ chối thành công !");
@@ -159,7 +197,7 @@ const ConfirmBook = () => {
                         </div>
                         <div className="employee-element-form">
                             <h4>CCCD: </h4>
-                            <p>{userInfo.CCCD}</p>
+                            <p>{userInfo.cccd}</p>
                         </div>
                         <div className="employee-element-form">
                             <h4>Giới tính: </h4>
@@ -186,8 +224,8 @@ const ConfirmBook = () => {
                             <p>{checkOut}</p>
                         </div>
                         <div className="employee-element-form">
-                            <h4>Giá phòng: </h4>
-                            <p>{roomInfo.price}</p>
+                            <h4>Tổng tiền: </h4>
+                            <p>{total}</p>
                         </div>
                     </div>
                 </div>

@@ -7,7 +7,6 @@ const PermisRoutes = () => {
     const [account, setAccount] = useState(null);
     useEffect(() => {
         let session = sessionStorage.getItem("account");
-        console.log(session);
         if (session) {
             setAccount(JSON.parse(session));
         }

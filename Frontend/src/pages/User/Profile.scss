@@ -41,3 +41,201 @@
         cursor: pointer;
     }
 }
+.invoice-header-container {
+    display: flex;
+    flex-direction: row;
+    h1 {
+        margin-right: 150px;
+        padding: 10px;
+    }
+    div {
+        p {
+            font-size: 14px;
+            color: #555;
+            margin: 4px 4px;
+            padding: 2px;
+        }
+    }
+}
+.qrcode-container {
+    text-align: center;
+}
+.btn-pay {
+    display: flex;
+    justify-content: flex-end;
+    // button {
+    //     border-radius: 10px;
+    //     padding: 7px 10px;
+    //     margin: 5px;
+    //     font-size: 16px;
+    //     color: #555;
+    //     background-color: ;
+    // }
+    button {
+        font-family: inherit;
+        font-size: 15px;
+        background: royalblue;
+        color: white;
+        padding: 4px 6px;
+        display: flex;
+        align-items: center;
+        border: none;
+        border-radius: 16px;
+        overflow: hidden;
+        transition: all 0.2s;
+        cursor: pointer;
+        span {
+            display: block;
+            margin-left: 0.3em;
+            transition: all 0.3s ease-in-out;
+        }
+        svg {
+            display: block;
+            transform-origin: center center;
+            transition: transform 0.3s ease-in-out;
+        }
+        button:hover .svg-wrapper {
+            animation: fly-1 0.6s ease-in-out infinite alternate;
+        }
+    }
+    button:hover svg {
+        transform: translateX(2.7em) rotate(45deg) scale(1.1);
+    }
+
+    button:hover span {
+        transform: translateX(6em);
+    }
+
+    button:active {
+        transform: scale(0.95);
+    }
+
+    @keyframes fly-1 {
+        from {
+            transform: translateY(0.1em);
+        }
+
+        to {
+            transform: translateY(-0.1em);
+        }
+    }
+}
+.invoice-user-info {
+    padding: 10px;
+    margin: 5px 10px;
+    h3 {
+        margin: 5px;
+        padding: 5px;
+    }
+    div {
+        margin: 5px;
+        padding: 5px;
+    }
+}
+.invoice-box {
+    max-width: 800px;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #eee;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+    font-size: 16px;
+    line-height: 24px;
+    font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+    color: #555;
+}
+
+.invoice-box table {
+    width: 100%;
+    line-height: inherit;
+    text-align: left;
+}
+
+.invoice-box table td {
+    padding: 5px;
+    vertical-align: top;
+    width: 200px;
+}
+
+.invoice-box table tr td:nth-child(2) {
+    text-align: right;
+}
+
+.invoice-box table tr.top table td {
+    padding-bottom: 20px;
+}
+
+.invoice-box table tr.top table td.title {
+    font-size: 45px;
+    line-height: 45px;
+    color: #333;
+}
+
+.invoice-box table tr.information table td {
+    padding-bottom: 40px;
+}
+
+.invoice-box table tr.heading td {
+    background: #eee;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+}
+
+.invoice-box table tr.details td {
+    padding-bottom: 20px;
+}
+
+.invoice-box table tr.item td {
+    border-bottom: 1px solid #eee;
+}
+
+.invoice-box table tr.item.last td {
+    border-bottom: none;
+}
+
+.invoice-box table tr.total td:nth-child(2) {
+    // border-top: 2px solid #eee;
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 600px) {
+    .invoice-box table tr.top table td {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+
+    .invoice-box table tr.information table td {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+}
+
+.btn-change-password {
+    cursor: pointer;
+    outline: 0;
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    display: inline-block;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    border: 1px solid transparent;
+    padding: 6px 12px;
+    font-size: 16px;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+        border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.btn-change-password:hover {
+    color: #fff;
+    background-color: #0b5ed7;
+    border-color: #0a58ca;
+}
+.user-btn-container {
+    display: flex;
+    width: 447px;
+    margin-top: 20px;
+    justify-content: flex-end;
+}

@@ -2,6 +2,7 @@
 import express from "express";
 import apiController from "../controllers/apiController";
 import apiController2 from "../controllers/apiController2";
+import apiController3 from "../controllers/apiController3";
 import multer from "multer";
 const path = require("path");
 
@@ -24,6 +25,7 @@ const initApiRoutes = (app) => {
 
     router.post("/edit-profile", apiController.handleEditProfile);
     router.post("/user-info", apiController.getUserInfo);
+    router.post("/change-password", apiController.handleChangePassword);
 
     router.post("/crud-room/create", apiController.handleCreateRoom);
     router.get("/crud-room/read", apiController.getRoom);
@@ -48,7 +50,19 @@ const initApiRoutes = (app) => {
     router.post("/book-service/history", apiController2.getServiceHistory);
     router.post("/book-service/cancel", apiController2.handleCancelService);
 
+    router.post("/payment/info-user", apiController2.getInfoUser);
     router.post("/payment/bill-data-by-id", apiController2.getBillDataById);
+    router.post("/payment/create-bill-room", apiController2.handleCreateBillRoom);
+    router.post("/payment/create-bill-service", apiController2.handleCreateBillService);
+    router.post("/payment/user-pay", apiController2.handleUserPay);
+    router.post("/payment/cancel-bill", apiController2.handleCancelBill);
+    router.post("/payment/confirm-bill", apiController2.handleConfirmBill);
+    router.get("/payment/bill-data-employee", apiController2.getBillDataEmployee);
+
+    router.get("/crud-employee/read", apiController3.getEmployee);
+    router.post("/crud-employee/update", apiController3.handleUpdateEmployee);
+    router.post("/crud-employee/delete", apiController3.handleDeleteEmployee);
+    router.post("/crud-employee/create", apiController3.handleCreateEmployee);
     return app.use("/api", router);
 };
 

@@ -96,7 +96,7 @@ const updateService = async (data) => {
             [data.name, data.price, data.desc, data.id]
         );
         return {
-            EM: "Sửa thông tin phòng thành công!",
+            EM: "Sửa thông tin dịch vụ thành công!",
             EC: "0",
             DT: "",
         };

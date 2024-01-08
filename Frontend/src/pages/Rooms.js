@@ -175,7 +175,7 @@ const Rooms = () => {
                         />
                         <p className="price">{roomData[selectedRoom].price}</p>
                         {renderRoomDetails()}
-                        <div style={{ color: "red", fontWeight: "bold" }}>
+                        <div style={{ color: "red", fontWeight: "bold", fontSize: "24px" }}>
                             Tổng tiền: {totalPrice} $
                         </div>
                         <div className="modal-buttons">
