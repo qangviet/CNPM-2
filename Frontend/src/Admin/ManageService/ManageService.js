@@ -7,6 +7,8 @@ const ManageService = () => {
     Modal.setAppElement("#root");
     const [serviceData, setServiceData] = useState([]);
 
+    const [effect, setEffect] = useState(0);
+
     const customStyles = {
         content: {
             top: "35%",
@@ -24,7 +26,7 @@ const ManageService = () => {
                 if (response.data.EC === "0") {
                     let data = [];
                     for (const r of response.data.DT) {
-                        let status;
+                        let status = [];
                         if (r.SERVICE_LOCK === 1) {
                             status[0] = { color: "green" };
                             status[1] = "Mở";
@@ -48,7 +50,7 @@ const ManageService = () => {
             });
         };
         getServiceData();
-    }, []);
+    }, [effect]);
 
     const [id, setId] = useState(0);
     const [name, setName] = useState("");
@@ -99,15 +101,7 @@ const ManageService = () => {
         });
         if (response.data.EC === "0") {
             toast.success("Thêm mới dịch vụ thành công!");
-            setServiceData((prev) => [
-                ...prev,
-                {
-                    id,
-                    name,
-                    price,
-                    desc,
-                },
-            ]);
+            setEffect((prev) => prev + 1);
             closeModalCreate();
         } else {
             toast.error(response.data.EM);
@@ -132,10 +126,7 @@ const ManageService = () => {
         );
         if (response.data.EC === "0") {
             toast.success(response.data.EM);
-            setServiceData((prev) => {
-                prev.splice(serviceDelete, 1);
-                return prev;
-            });
+            setEffect((prev) => prev + 1);
             closeModalDelete();
         } else {
             toast.error(response.data.EM);
@@ -166,12 +157,7 @@ const ManageService = () => {
         });
         if (res.data.EC === "0") {
             toast.success(res.data.EM);
-            setServiceData((prev) => {
-                prev[serviceEdit].name = name;
-                prev[serviceEdit].price = price;
-                prev[serviceEdit].desc = desc;
-                return prev;
-            });
+            setEffect((prev) => prev + 1);
             closeModalUpdate();
         } else {
             toast.error(res.data.EM);
@@ -217,6 +203,7 @@ const ManageService = () => {
     const openModalLock = (index) => {
         setModalLock(true);
         setLock(serviceData[index].status[2]);
+        setId(serviceData[index].id);
     };
 
     const closeModalLock = () => {
@@ -227,6 +214,14 @@ const ManageService = () => {
 
     return (
         <React.Fragment>
+            <Modal
+                isOpen={modalLock}
+                onRequestClose={closeModalLock}
+                style={customStyles}
+                contentLabel="Xác nhận khóa/mở khóa dịch vụ"
+            >
+                {renderContent()}
+            </Modal>
             <Modal
                 isOpen={modalCreate}
                 onRequestClose={closeModalCreate}
@@ -394,7 +389,10 @@ const ManageService = () => {
                                 </td>
                                 <td style={s.status[0]}>{s.status[1]}</td>
                                 <td>
-                                    <button className="ad-btn-action">
+                                    <button
+                                        className="ad-btn-action"
+                                        onClick={() => openModalUpdate(index)}
+                                    >
                                         <img
                                             src={`${process.env.PUBLIC_URL}/Images/Icon/pencil.png`}
                                             style={{
@@ -402,10 +400,12 @@ const ManageService = () => {
                                                 height: "20px",
                                                 backgroundColor: "none",
                                             }}
-                                            onClick={() => openModalUpdate(index)}
                                         ></img>
                                     </button>
-                                    <button className="ad-btn-action">
+                                    <button
+                                        className="ad-btn-action"
+                                        onClick={() => openModalDelete(index)}
+                                    >
                                         <img
                                             src={`${process.env.PUBLIC_URL}/Images/Icon/bin.png`}
                                             style={{
@@ -413,10 +413,12 @@ const ManageService = () => {
                                                 height: "20px",
                                                 backgroundColor: "none",
                                             }}
-                                            onClick={() => openModalDelete(index)}
                                         ></img>
                                     </button>
-                                    <button className="ad-btn-action">
+                                    <button
+                                        className="ad-btn-action"
+                                        onClick={() => openModalLock(index)}
+                                    >
                                         <img
                                             src={`${process.env.PUBLIC_URL}/Images/Icon/padlock.png`}
                                             style={{
