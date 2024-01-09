@@ -3,6 +3,7 @@ import express from "express";
 import apiController from "../controllers/apiController";
 import apiController2 from "../controllers/apiController2";
 import apiController3 from "../controllers/apiController3";
+import feedbackController from "../controllers/feedbackController";
 import multer from "multer";
 const path = require("path");
 
@@ -63,6 +64,9 @@ const initApiRoutes = (app) => {
     router.post("/crud-employee/update", apiController3.handleUpdateEmployee);
     router.post("/crud-employee/delete", apiController3.handleDeleteEmployee);
     router.post("/crud-employee/create", apiController3.handleCreateEmployee);
+
+    router.get("/feedback/data", feedbackController.getRecentFeedback);
+    router.post("/feedback/create", feedbackController.handleCreateFeedback);
     return app.use("/api", router);
 };
 

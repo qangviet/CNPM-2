@@ -1,4 +1,9 @@
-import { createFeedback, deleteFeedback, calculateAverageRating, recentFeedback } from "../services/Feedback.js";
+import {
+    createFeedback,
+    deleteFeedback,
+    calculateAverageRating,
+    recentFeedback,
+} from "../services/Feedback.js";
 
 const handleCreateFeedback = async (req, res) => {
     try {
@@ -56,7 +61,7 @@ const getDisplayRating = async (req, res) => {
 
 const getRecentFeedback = async (req, res) => {
     try {
-        let data = await recentFeedback(req.body);
+        let data = await recentFeedback();
         return res.status(200).json({
             EM: data.EM,
             EC: data.EC,
@@ -72,10 +77,9 @@ const getRecentFeedback = async (req, res) => {
     }
 };
 
-
 module.exports = {
     handleCreateFeedback,
     handleDeleteFeedback,
     getDisplayRating,
     getRecentFeedback,
-}
+};

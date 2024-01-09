@@ -1,18 +1,44 @@
 import connection from "../config/database";
 
-const createFeedback = async (data) => {
-    const date = new Date();
-    const day = date.getDate();
-    const month = date.getMonth()+1;
-    const year = date.getFullYear();
-    const fb_time = `${year}-${month < 10 ? '0' : ''}${month}-${day < 10 ? '0' : ''}${day}`;
-    const fb_id = data.khId + data.fbTime;
+const checkfbID = async (id) => {
     try {
-        await connection.query(
-            `insert into feedback values (?, ?, ?, ?, ?)`,
-            [fb_id, fb_time, data.fbRating, data.text, data.khId]
+        const [result, fields] = await connection.query(
+            `select FB_ID from feedback where FB_ID = ?`,
+            [id]
         );
+        return result.length > 0;
+    } catch (error) {
+        console.log(error);
+        return false;
+    }
+};
 
+const generateID = async () => {
+    const randomNumber = Math.random();
+    let id;
+    id = Math.floor(randomNumber * 10000000);
+    let chk = await checkfbID(id);
+    if (!chk) {
+        id = Math.floor(randomNumber * 10000000);
+    }
+    return id;
+};
+
+/**
+ *
+ * @param {khID, time, rate, text} data
+ * @returns
+ */
+const createFeedback = async (data) => {
+    let id = await generateID();
+    try {
+        await connection.query(`insert into feedback values (?, ?, ?, ?, ?)`, [
+            id,
+            data.time,
+            data.rate,
+            data.text,
+            data.khID,
+        ]);
         return {
             EM: "Thêm mới feedback thành công!",
             EC: "0",
@@ -28,27 +54,11 @@ const createFeedback = async (data) => {
     }
 };
 
-const checkfbID = async (id) => {
-    try {
-        const [result, fields] = await connection.query(
-            `select FB_ID from feedback where FB_ID = ? LIMIT 1`,
-            [id]
-        );
-        return result.length > 0;
-    } catch (error) {
-        console.log(error);
-        return false;
-    }
-};
-
 const deleteFeedback = async (data) => {
     try {
         let check = await checkfbID(data.id);
         if (check) {
-            await connection.query(
-                `delete from feedback where FB_ID = ?`,
-                [data.id]
-            );
+            await connection.query(`delete from feedback where FB_ID = ?`, [data.id]);
             return {
                 EM: "Xóa feedback thành công !",
                 EC: "0",
@@ -97,15 +107,14 @@ const calculateAverageRating = async () => {
 const recentFeedback = async () => {
     try {
         const [result, fields] = await connection.query(
-            `select * from feedback ORDER BY fb_time desc limit 5;`
+            `select * from feedback f 
+            join khachhang kh on f.KH_ID = kh.KH_ID
+            ORDER BY fb_time desc;`
         );
-
         return {
             EM: "Lấy dữ liệu thành công!",
             EC: "0",
-            DT: {
-                feedbacks: result || [],
-            },
+            DT: result,
         };
     } catch (error) {
         console.log(error);
@@ -116,7 +125,6 @@ const recentFeedback = async () => {
         };
     }
 };
-
 
 module.exports = {
     createFeedback,
