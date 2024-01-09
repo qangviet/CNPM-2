@@ -22,7 +22,7 @@ const createRoom = async (data) => {
         }
         await connection.query(
             `insert into room values
-            (?, ?, ?, ?)`,
+            (?, ?, ?, ?, 1)`,
             [data.ID, data.type, data.price, data.desc]
         );
         return {
@@ -72,14 +72,52 @@ const readRoom = async () => {
     };
 };
 
+const compareTime = (input) => {
+    const inputDate = new Date(input);
+    inputDate.setHours(0, 0, 0, 0);
+
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+
+    const oneDay = 24 * 60 * 60 * 1000; // số milliseconds trong một ngày
+    const timeDifference = currentDate - inputDate;
+
+    return timeDifference >= oneDay;
+};
+
 const deleteRoom = async (data) => {
     try {
-        await connection.query(
-            `update reservation
-            set ROOM_ID = null
+        let [r1, f1] = await connection.query(
+            `select CheckInDate, CheckOutDate
+            from reservation where ROOM_ID = ?`,
+            [data.id]
+        );
+        for (const r of r1) {
+            let chk = compareTime(r.CheckOutDate);
+            if (!chk)
+                return {
+                    EM: "Phòng vẫn đang được sử dụng. Không thể xóa!",
+                    EC: "1",
+                    DT: "",
+                };
+        }
+        let [r2, f2] = await connection.query(
+            `select RESERVATION_ID from reservation
             where ROOM_ID = ?`,
             [data.id]
         );
+        for (const rs of r2) {
+            await connection.query(
+                `delete from bill
+                where RESERVATION_ID = ?`,
+                [rs.RESERVATION_ID]
+            );
+            await connection.query(
+                `delete from reservation
+                where RESERVATION_ID = ?`,
+                [rs.RESERVATION_ID]
+            );
+        }
         await connection.query(
             `delete from room
             where ROOM_ID = ?`,
@@ -99,10 +137,44 @@ const deleteRoom = async (data) => {
         };
     }
 };
+/**
+ *
+ * @param {id, lock} data
+ * @returns
+ */
+const lockRoom = async (data) => {
+    try {
+        await connection.query(
+            `update room 
+            set ROOM_LOCK = ?
+            where ROOM_ID = ?`,
+            [data.lock, data.id]
+        );
+        let EM;
+        if (data.lock === 1) {
+            EM = "Đã mở khóa phòng thành công!";
+        } else {
+            EM = "Đã khóa phòng thành công!";
+        }
+        return {
+            EM,
+            EC: "0",
+            DT: "",
+        };
+    } catch (error) {
+        console.log(error);
+        return {
+            EM: "database is error",
+            EC: -1,
+            DT: "",
+        };
+    }
+};
 
 module.exports = {
     readRoom,
     createRoom,
     updateRoom,
     deleteRoom,
+    lockRoom,
 };

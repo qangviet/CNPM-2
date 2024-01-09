@@ -109,6 +109,11 @@ const cancelService = async (data) => {
             where SH_ID = ?`,
             [data.id]
         );
+        await connection.query(
+            `delete from bill
+            where SH_ID = ?`,
+            [data.id]
+        );
         return {
             EM: "Hủy dịch vụ thành công!",
             EC: "0",

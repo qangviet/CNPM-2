@@ -24,11 +24,23 @@ const ManageService = () => {
                 if (response.data.EC === "0") {
                     let data = [];
                     for (const r of response.data.DT) {
+                        let status;
+                        if (r.SERVICE_LOCK === 1) {
+                            status[0] = { color: "green" };
+                            status[1] = "Mở";
+                            status[2] = 1;
+                        } else {
+                            status[0] = { color: "red" };
+                            status[1] = "Khóa";
+                            status[2] = 0;
+                        }
+
                         data.push({
                             id: r.SERVICE_ID,
                             name: r.SERVICE_NAME,
                             price: r.SERVICE_PRICE,
                             desc: r.SERVICE_DESC,
+                            status,
                         });
                     }
                     setServiceData(data);
@@ -165,6 +177,53 @@ const ManageService = () => {
             toast.error(res.data.EM);
         }
     };
+
+    const [modalLock, setModalLock] = useState(false);
+    const [lock, setLock] = useState(0);
+
+    const renderContent = () => {
+        if (lock) {
+            return (
+                <>
+                    <h3>Xác nhận khóa phòng</h3>
+                    <p>Phòng sẽ không hiển thị để đặt phòng?</p>
+                    <div className="element-form">
+                        <button className="btn-create" onClick={() => handleLock(0)}>
+                            Khóa
+                        </button>
+                        <button className="btn-close" onClick={closeModalLock}>
+                            Hủy
+                        </button>
+                    </div>
+                </>
+            );
+        } else
+            return (
+                <>
+                    <h3>Xác nhận mở khóa phòng</h3>
+                    <p>Phòng sẽ được đưa vào sử dụng?</p>
+                    <div className="element-form">
+                        <button className="btn-create" onClick={() => handleLock(1)}>
+                            Mở khóa
+                        </button>
+                        <button className="btn-close" onClick={closeModalLock}>
+                            Hủy
+                        </button>
+                    </div>
+                </>
+            );
+    };
+
+    const openModalLock = (index) => {
+        setModalLock(true);
+        setLock(serviceData[index].status[2]);
+    };
+
+    const closeModalLock = () => {
+        setModalLock(false);
+    };
+
+    const handleLock = () => {};
 
     return (
         <React.Fragment>
@@ -318,6 +377,7 @@ const ManageService = () => {
                             <th>Tên dịch vụ</th>
                             <th>Giá ($)</th>
                             <th>Thông tin chi tiết</th>
+                            <th>Trạng thái</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
@@ -332,19 +392,39 @@ const ManageService = () => {
                                         <p key={index}> {item}</p>
                                     ))}
                                 </td>
+                                <td style={s.status[0]}>{s.status[1]}</td>
                                 <td>
                                     <button className="ad-btn-action">
-                                        <i
-                                            className="fa fa-pencil"
-                                            aria-hidden="true"
+                                        <img
+                                            src={`${process.env.PUBLIC_URL}/Images/Icon/pencil.png`}
+                                            style={{
+                                                width: "20px",
+                                                height: "20px",
+                                                backgroundColor: "none",
+                                            }}
                                             onClick={() => openModalUpdate(index)}
-                                        ></i>
+                                        ></img>
                                     </button>
-                                    <button
-                                        className="ad-btn-action"
-                                        onClick={() => openModalDelete(index)}
-                                    >
-                                        <i className="fa fa-trash" aria-hidden="true"></i>
+                                    <button className="ad-btn-action">
+                                        <img
+                                            src={`${process.env.PUBLIC_URL}/Images/Icon/bin.png`}
+                                            style={{
+                                                width: "20px",
+                                                height: "20px",
+                                                backgroundColor: "none",
+                                            }}
+                                            onClick={() => openModalDelete(index)}
+                                        ></img>
+                                    </button>
+                                    <button className="ad-btn-action">
+                                        <img
+                                            src={`${process.env.PUBLIC_URL}/Images/Icon/padlock.png`}
+                                            style={{
+                                                width: "20px",
+                                                height: "20px",
+                                                backgroundColor: "none",
+                                            }}
+                                        ></img>
                                     </button>
                                 </td>
                             </tr>

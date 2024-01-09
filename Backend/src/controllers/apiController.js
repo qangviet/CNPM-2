@@ -6,8 +6,9 @@ import {
     confirmBook,
     declineBook,
     bookHistory,
+    allBookRoom,
 } from "../services/BookRoom";
-import { createRoom, readRoom, deleteRoom, updateRoom } from "../services/CRUDRoom";
+import { createRoom, readRoom, deleteRoom, updateRoom, lockRoom } from "../services/CRUDRoom";
 
 import { userInfo, editProfile, changePassword } from "../services/EditProfile";
 
@@ -133,6 +134,24 @@ const handleCreateRoom = async (req, res) => {
 const getRoom = async (req, res) => {
     try {
         let data = await readRoom(req.body);
+        return res.status(200).json({
+            EM: data.EM,
+            EC: data.EC,
+            DT: data.DT,
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            EM: "error from server",
+            EC: "-1",
+            DT: "",
+        });
+    }
+};
+
+const handleLockRoom = async (req, res) => {
+    try {
+        let data = await lockRoom(req.body);
         return res.status(200).json({
             EM: data.EM,
             EC: data.EC,
@@ -416,17 +435,37 @@ const handleUpdateService = async (req, res) => {
     }
 };
 
+const getAllBookRoom = async (req, res) => {
+    try {
+        let data = await allBookRoom();
+        return res.status(200).json({
+            EM: data.EM,
+            EC: data.EC,
+            DT: data.DT,
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            EM: "error from server",
+            EC: "-1",
+            DT: "",
+        });
+    }
+};
+
 module.exports = {
     handleRegister,
     handleLogin,
     getEmptyRoom,
     handleBookRoom,
     handleCreateRoom,
+    handleLockRoom,
     getRoom,
     handleDeleteRoom,
     handleUpdateRoom,
     handleUploadImage,
     getBookData,
+    getAllBookRoom,
     handleConfirmBook,
     handleDeclineBook,
     getUserInfo,

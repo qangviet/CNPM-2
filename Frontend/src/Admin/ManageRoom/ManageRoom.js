@@ -9,6 +9,7 @@ import FormData from "form-data";
 const ManageRoom = () => {
     Modal.setAppElement("#admin-content");
     const [roomData, setRoomData] = useState([]);
+    const [effect, setEffect] = useState(0);
     useEffect(() => {
         const getRoomData = async () => {
             await axios
@@ -20,12 +21,23 @@ const ManageRoom = () => {
                     } else if (response.data.EC === "0") {
                         let rdata = [];
                         for (const r of response.data.DT) {
+                            let status = [];
+                            if (r.ROOM_LOCK === 1) {
+                                status[0] = { color: "green" };
+                                status[1] = "Mở";
+                                status[2] = 1;
+                            } else {
+                                status[0] = { color: "red" };
+                                status[1] = "Khóa";
+                                status[2] = 0;
+                            }
                             rdata.push({
                                 id: r.ROOM_ID,
                                 type: r.ROOM_TYPE,
                                 price: r.ROOM_PRICE,
                                 image: `${process.env.PUBLIC_URL}/Images/Rooms/${r.ROOM_ID}.jpg`,
                                 desc: r.ROOM_DESC,
+                                status,
                             });
                         }
                         setRoomData(rdata);
@@ -35,7 +47,7 @@ const ManageRoom = () => {
                 .catch((error) => console.log(error));
         };
         getRoomData();
-    }, []);
+    }, [effect]);
     const [modalFormCreate, setModalFormCreate] = useState(false);
 
     const [ID, setID] = useState("");
@@ -148,7 +160,7 @@ const ManageRoom = () => {
             });
             closeModalDelete();
         } else {
-            toast.success(response.data.EM);
+            toast.error(response.data.EM);
             closeModalDelete();
         }
     };
@@ -218,8 +230,77 @@ const ManageRoom = () => {
         }
     };
 
+    const [modalLock, setModalLock] = useState(false);
+    const [lock, setLock] = useState(0);
+    const renderContent = () => {
+        if (lock) {
+            return (
+                <>
+                    <h3>Xác nhận khóa phòng</h3>
+                    <p>Phòng sẽ không hiển thị để đặt phòng?</p>
+                    <div className="element-form">
+                        <button className="btn-create" onClick={() => handleLock(0)}>
+                            Khóa
+                        </button>
+                        <button className="btn-close" onClick={closeModalLock}>
+                            Hủy
+                        </button>
+                    </div>
+                </>
+            );
+        } else
+            return (
+                <>
+                    <h3>Xác nhận mở khóa phòng</h3>
+                    <p>Phòng sẽ được đưa vào sử dụng?</p>
+                    <div className="element-form">
+                        <button className="btn-create" onClick={() => handleLock(1)}>
+                            Mở khóa
+                        </button>
+                        <button className="btn-close" onClick={closeModalLock}>
+                            Hủy
+                        </button>
+                    </div>
+                </>
+            );
+    };
+
+    const openModalLock = (index) => {
+        setLock(roomData[index].status[2]);
+        setID(roomData[index].id);
+        setModalLock(true);
+    };
+
+    const closeModalLock = () => {
+        setID("");
+        setLock(-1);
+        setModalLock(false);
+    };
+
+    const handleLock = async (lock) => {
+        let res = await axios.post("http://localhost:8088/api/crud-room/lock", {
+            id: ID,
+            lock: lock,
+        });
+        if (res.data.EC === "0") {
+            toast.success(res.data.EM);
+            setEffect((prev) => prev + 1);
+            closeModalLock();
+        } else {
+            toast.error(res.data.EM);
+        }
+    };
+
     return (
         <React.Fragment>
+            <Modal
+                isOpen={modalLock}
+                onRequestClose={closeModalLock}
+                style={customStyles}
+                contentLabel="Xác nhận khóa phòng"
+            >
+                {renderContent()}
+            </Modal>
             <Modal
                 isOpen={modalFormCreate}
                 onRequestClose={closeFormCreate}
@@ -346,7 +427,6 @@ const ManageRoom = () => {
                     <input
                         type="file"
                         accept="image/png, image/jpeg, image/jpg"
-                        // value={image}
                         onChange={(e) => setImage(e.target.files[0])}
                     ></input>
                 </div>
@@ -388,6 +468,7 @@ const ManageRoom = () => {
                             <th>Loại phòng</th>
                             <th>Giá ($)</th>
                             <th>Thông tin chi tiết</th>
+                            <th>Trạng thái</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
@@ -405,18 +486,46 @@ const ManageRoom = () => {
                                 <td>{room.type}</td>
                                 <td>{room.price}</td>
                                 <td className="td-wraptext">{room.desc}</td>
+                                <td style={room.status[0]}>{room.status[1]}</td>
                                 <td>
                                     <button
                                         className="ad-btn-action"
                                         onClick={() => openModalEdit(index)}
                                     >
-                                        <i className="fa fa-pencil" aria-hidden="true"></i>
+                                        <img
+                                            src={`${process.env.PUBLIC_URL}/Images/Icon/pencil.png`}
+                                            style={{
+                                                width: "20px",
+                                                height: "20px",
+                                                backgroundColor: "none",
+                                            }}
+                                        ></img>
                                     </button>
                                     <button
                                         className="ad-btn-action"
                                         onClick={() => openModalDelete(index)}
                                     >
-                                        <i className="fa fa-trash" aria-hidden="true"></i>
+                                        <img
+                                            src={`${process.env.PUBLIC_URL}/Images/Icon/bin.png`}
+                                            style={{
+                                                width: "20px",
+                                                height: "20px",
+                                                backgroundColor: "none",
+                                            }}
+                                        ></img>
+                                    </button>
+                                    <button
+                                        className="ad-btn-action"
+                                        onClick={() => openModalLock(index)}
+                                    >
+                                        <img
+                                            src={`${process.env.PUBLIC_URL}/Images/Icon/padlock.png`}
+                                            style={{
+                                                width: "20px",
+                                                height: "20px",
+                                                backgroundColor: "none",
+                                            }}
+                                        ></img>
                                     </button>
                                 </td>
                             </tr>

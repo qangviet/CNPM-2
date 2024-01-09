@@ -32,6 +32,7 @@ const initApiRoutes = (app) => {
     router.get("/crud-room/read", apiController.getRoom);
     router.post("/crud-room/delete", apiController.handleDeleteRoom);
     router.post("/crud-room/update", apiController.handleUpdateRoom);
+    router.post("/crud-room/lock", apiController.handleLockRoom);
 
     router.post("/upload-image", upload.single("image"), apiController.handleUploadImage);
     router.post("/empty-room", apiController.getEmptyRoom);
@@ -40,7 +41,7 @@ const initApiRoutes = (app) => {
     router.get("/book-data", apiController.getBookData);
     router.post("/decline-book", apiController.handleDeclineBook);
     router.post("/book-history", apiController.getBookHistory);
-
+    router.get("/all-book-history", apiController.getAllBookRoom);
     router.get("/crud-service/read", apiController.getServiceData);
     router.post("/crud-service/create", apiController.handleCreateService);
     router.post("/crud-service/delete", apiController.handleDeleteService);
@@ -67,6 +68,8 @@ const initApiRoutes = (app) => {
 
     router.get("/feedback/data", feedbackController.getRecentFeedback);
     router.post("/feedback/create", feedbackController.handleCreateFeedback);
+
+    router.get("/user-data", apiController3.getUserData);
     return app.use("/api", router);
 };
 

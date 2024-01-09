@@ -17,8 +17,6 @@ const ManageEmployee = () => {
         },
     };
 
-    console.log("Rerender");
-
     useEffect(() => {
         const getData = async () => {
             await axios
@@ -429,6 +427,7 @@ const ManageEmployee = () => {
                                 <th>Địa chỉ</th>
                                 <th>Username</th>
                                 <th>Password</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -443,18 +442,26 @@ const ManageEmployee = () => {
                                     <td>{e.password}</td>
                                     <td>
                                         <button className="ad-btn-action">
-                                            <i
-                                                className="fa fa-pencil"
-                                                aria-hidden="true"
+                                            <img
+                                                src={`${process.env.PUBLIC_URL}/Images/Icon/pencil.png`}
+                                                style={{
+                                                    width: "20px",
+                                                    height: "20px",
+                                                    backgroundColor: "none",
+                                                }}
                                                 onClick={() => openModalUpdate(index)}
-                                            ></i>
+                                            ></img>
                                         </button>
                                         <button className="ad-btn-action">
-                                            <i
-                                                className="fa fa-trash"
-                                                aria-hidden="true"
+                                            <img
+                                                src={`${process.env.PUBLIC_URL}/Images/Icon/bin.png`}
+                                                style={{
+                                                    width: "20px",
+                                                    height: "20px",
+                                                    backgroundColor: "none",
+                                                }}
                                                 onClick={() => openModalDelete(index)}
-                                            ></i>
+                                            ></img>
                                         </button>
                                     </td>
                                 </tr>

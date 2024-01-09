@@ -7,15 +7,37 @@ const generateID = () => {
     }
     return id;
 };
+
+const allBookRoom = async () => {
+    try {
+        const [r, f] = await connection.query(`select * 
+        from reservation rs join room r on r.ROOM_ID = rs.ROOM_ID
+        order by create_at desc`);
+        return {
+            EM: "",
+            EC: "0",
+            DT: r,
+        };
+    } catch (error) {
+        console.log(error);
+        return {
+            EM: "database error",
+            EC: "-1",
+            DT: "",
+        };
+    }
+};
+
 const emptyRoom = async (data) => {
     try {
         const [r1, f1] = await connection.query(
             `select * from room
             where ROOM_ID not in (
                 select ROOM_ID from reservation
-                where ((? <= CheckInDate AND CheckInDate <= ?) 
+                    where ((? <= CheckInDate AND CheckInDate <= ?) 
                        or(? <= CheckOutDate and CheckOutDate <= ?))
-            	AND RESERVATION_STATUS in (0, 1))`,
+            	AND RESERVATION_STATUS in (0, 1))
+                AND ROOM_LOCK = 1`,
             [data.checkIn, data.checkOut, data.checkIn, data.checkOut]
         );
         return {
@@ -180,4 +202,5 @@ module.exports = {
     confirmBook,
     declineBook,
     bookHistory,
+    allBookRoom,
 };

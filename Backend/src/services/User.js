@@ -2,7 +2,7 @@ import connection from "../config/database";
 
 const readUser = async () => {
     try {
-        let [r, f] = await connection.query(`select * from khachang`);
+        let [r, f] = await connection.query(`select * from khachhang`);
         return {
             EM: "",
             EC: "0",
@@ -16,4 +16,8 @@ const readUser = async () => {
             DT: "",
         };
     }
+};
+
+module.exports = {
+    readUser,
 };

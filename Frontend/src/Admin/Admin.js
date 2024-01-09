@@ -7,6 +7,7 @@ import ManageRoom from "./ManageRoom/ManageRoom";
 import ManageUser from "./ManageUser/ManageUser";
 import ManageService from "./ManageService/ManageService";
 import Report from "./Report/Report";
+import BookRoomHistory from "./BookRoomHistory/BookRoomHistory";
 const Admin = () => {
     const [choice, setChoice] = useState({
         qlnv: false,
@@ -14,6 +15,7 @@ const Admin = () => {
         qlp: false,
         qldv: false,
         bctk: false,
+        lsdp: false,
     });
     return (
         <>
@@ -28,6 +30,7 @@ const Admin = () => {
                                 qlp: false,
                                 qldv: false,
                                 bctk: false,
+                                lsdp: false,
                             });
                         }}
                         className={choice.qlnv ? "ad-sidebar-choice" : ""}
@@ -42,6 +45,7 @@ const Admin = () => {
                                 qlp: false,
                                 qldv: false,
                                 bctk: false,
+                                lsdp: false,
                             });
                         }}
                         className={choice.qlkh ? "ad-sidebar-choice" : ""}
@@ -56,6 +60,7 @@ const Admin = () => {
                                 qlp: false,
                                 qldv: true,
                                 bctk: false,
+                                lsdp: false,
                             });
                         }}
                         className={choice.qldv ? "ad-sidebar-choice" : ""}
@@ -70,6 +75,7 @@ const Admin = () => {
                                 qlp: true,
                                 qldv: false,
                                 bctk: false,
+                                lsdp: false,
                             });
                         }}
                         className={choice.qlp ? "ad-sidebar-choice" : ""}
@@ -84,11 +90,27 @@ const Admin = () => {
                                 qlp: false,
                                 qldv: false,
                                 bctk: true,
+                                lsdp: false,
                             });
                         }}
                         className={choice.bctk ? "ad-sidebar-choice" : ""}
                     >
                         Báo cáo, thống kê
+                    </div>
+                    <div
+                        onClick={() => {
+                            setChoice({
+                                qlnv: false,
+                                qlkh: false,
+                                qlp: false,
+                                qldv: false,
+                                bctk: false,
+                                lsdp: true,
+                            });
+                        }}
+                        className={choice.lsdp ? "ad-sidebar-choice" : ""}
+                    >
+                        Lịch sử đặt phòng
                     </div>
                 </div>
                 <div className="admin-content" id="admin-content">
@@ -97,6 +119,7 @@ const Admin = () => {
                     {choice.qldv && <ManageService></ManageService>}
                     {choice.qlkh && <ManageUser></ManageUser>}
                     {choice.bctk && <Report></Report>}
+                    {choice.lsdp && <BookRoomHistory></BookRoomHistory>}
                 </div>
             </div>
         </>

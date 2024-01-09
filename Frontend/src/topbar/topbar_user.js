@@ -27,7 +27,7 @@ export default function TopbarUser(props) {
                         <Link to="/rooms">ROOMS</Link>
                     </li>
                     <li className="topListItem">
-                        <Link to="/feedback">Feedback</Link>
+                        <Link to="/feedback">FEEDBACK</Link>
                     </li>
                     <li className="topListItem">
                         <Link to="/profile">{props.KH_name}</Link>

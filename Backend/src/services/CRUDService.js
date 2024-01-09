@@ -30,7 +30,7 @@ const readService = async () => {
 
 const createService = async (data) => {
     try {
-        let chk = checkId(data.id);
+        let chk = await checkId(data.id);
         if (chk) {
             return {
                 EM: "Id đã tồn tại!",
@@ -40,7 +40,7 @@ const createService = async (data) => {
         }
         await connection.query(
             `insert into service values
-            (?, ?, ?, ?)`,
+            (?, ?, ?, ?, 1)`,
             [data.id, data.name, data.price, data.desc]
         );
         return {
@@ -58,15 +58,49 @@ const createService = async (data) => {
     }
 };
 
+const compareTime = (input) => {
+    const inputDate = new Date(input);
+    inputDate.setHours(0, 0, 0, 0);
+    const currentDate = new Date();
+    currentDate.setHours(0, 0, 0, 0);
+    console.log(inputDate);
+    console.log(currentDate);
+    const oneDay = 24 * 60 * 60 * 1000; // số milliseconds trong một ngày
+    const timeDifference = currentDate - inputDate;
+
+    return timeDifference >= oneDay;
+};
+
 const deleteService = async (data) => {
     try {
-        await connection.query(
-            `update service_history
-            set SERVICE_ID = NULL
+        let [r1, f1] = await connection.query(
+            `select DATE, SH_ID 
+            from service_history
             where SERVICE_ID = ?
             `,
             [data.id]
         );
+        for (const s of r1) {
+            let chk = compareTime(s.DATE);
+            if (!chk)
+                return {
+                    EM: "Dịch vẫn đang được sử dụng. Không thể xóa!",
+                    EC: "1",
+                    DT: "",
+                };
+        }
+        for (const s of r1) {
+            await connection.query(
+                `delete from bill
+                where SH_ID = ?`,
+                [s.SH_ID]
+            );
+            await connection.query(
+                `delete from service_history
+                where SH_ID = ?`,
+                [s.SH_ID]
+            );
+        }
         await connection.query(
             `delete from service
             where SERVICE_ID = ?`,
