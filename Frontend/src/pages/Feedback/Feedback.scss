@@ -2,12 +2,12 @@
     margin: 10px;
 }
 .avg-rate {
-    font-size: 32px;
+    font-size: 40px;
     color: red;
-    font-weight: bold;
+    font-weight: 600;
 }
 .rate-slider {
-    width: 300px;
+    width: 400px;
     height: 10px;
     border-radius: 15px;
     border: 1px solid #000000;
@@ -18,7 +18,7 @@
     padding: 10px;
     display: flex;
     flex-direction: row;
-    gap: 250px;
+    gap: 400px;
     .avg-rate-container {
         text-align: center;
     }
@@ -83,4 +83,35 @@
     background-color: #c85000;
     box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
     transform: translateY(0);
+}
+
+.user-fb-container {
+    padding: 5px;
+    margin: 5px;
+    width: 95vw;
+    p {
+        padding: 4px;
+        margin: 2px 10px;
+        line-height: 1.5;
+    }
+    i {
+        font-size: 13px;
+        padding: 4px;
+        margin: 2px 10px;
+    }
+}
+
+.fb-divider {
+    border: 0.5px solid #8686863f;
+    width: 95vw;
+    margin: 10px 0px;
+}
+.fb-user-info {
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+    img {
+        padding: 5px;
+        margin-top: 5px;
+    }
 }

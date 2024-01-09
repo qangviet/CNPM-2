@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Feedback.scss"; // Import the CSS file
 import Modal from "react-modal";
+import Star from "./Star";
 
 const Feedback = () => {
     Modal.setAppElement("#root");
@@ -101,7 +102,7 @@ const Feedback = () => {
                 <h2>KHÁCH HÀNG NHẬN XÉT</h2>
                 <div className="fb-rate-container">
                     <div className="avg-rate-container">
-                        <p>Đánh giá trung bình</p>
+                        <p style={{ fontSize: "26px", fontWeight: "bold" }}>Đánh giá trung bình</p>
                         <p className="avg-rate">5 / 5</p>
                         <p style={{ color: "gray" }}>(92) đánh giá</p>
                     </div>
@@ -128,6 +129,26 @@ const Feedback = () => {
                             Viết đánh giá của bạn
                         </button>
                     </div>
+                </div>
+                <div className="user-fb-container">
+                    {feedbackData.map((fb, index) => (
+                        <>
+                            <div className="fb-divider"></div>
+                            <div className="fb-user-info">
+                                <img
+                                    src={`${process.env.PUBLIC_URL}/Images/Employee/avatar.png`}
+                                    width="36px"
+                                    height="36px"
+                                    alt="avatar"
+                                />
+                                <h4>{fb.name}</h4>
+                                <Star numberStar={`${fb.rate}`} />
+                            </div>
+                            <p>{fb.text}</p>
+                            <i>{fb.time}</i>
+                            <br></br>
+                        </>
+                    ))}
                 </div>
             </div>
         </>
