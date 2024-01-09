@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2024 at 05:19 PM
+-- Generation Time: Jan 09, 2024 at 05:10 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -40,6 +40,7 @@ CREATE TABLE `admin` (
 --
 
 CREATE TABLE `bill` (
+  `ID` int(11) NOT NULL,
   `BILL_ID` int(11) NOT NULL,
   `TOTAL` int(11) NOT NULL,
   `BILL_TIME` datetime DEFAULT NULL,
@@ -47,17 +48,21 @@ CREATE TABLE `bill` (
   `SH_ID` int(11) DEFAULT NULL,
   `RESERVATION_ID` int(11) DEFAULT NULL,
   `KH_ID` int(11) DEFAULT NULL,
-  `COUPON_ID` varchar(20) DEFAULT NULL
+  `COUPON_ID` varchar(20) DEFAULT NULL,
+  `PAYMENT_METHOD` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `bill`
 --
 
-INSERT INTO `bill` (`BILL_ID`, `TOTAL`, `BILL_TIME`, `BILL_STATUS`, `SH_ID`, `RESERVATION_ID`, `KH_ID`, `COUPON_ID`) VALUES
-(111, 2500, NULL, 0, 3771894, NULL, 70203676, NULL),
-(112, 1200, NULL, 0, 1704307, NULL, 70203676, NULL),
-(113, 990, NULL, 0, NULL, 348869, 70203676, NULL);
+INSERT INTO `bill` (`ID`, `BILL_ID`, `TOTAL`, `BILL_TIME`, `BILL_STATUS`, `SH_ID`, `RESERVATION_ID`, `KH_ID`, `COUPON_ID`, `PAYMENT_METHOD`) VALUES
+(1, 105, 1000, NULL, 2, NULL, 200, NULL, NULL, NULL),
+(2, 111, 2500, NULL, 0, 3771894, NULL, 70203676, NULL, NULL),
+(3, 112, 1200, NULL, 0, 1704307, NULL, 70203676, NULL, NULL),
+(4, 113, 990, NULL, 0, NULL, 348869, 70203676, NULL, NULL),
+(5, 11926730, 438, '2024-09-01 22:51:28', 2, NULL, 479210, 70479208, NULL, 'Tiền mặt'),
+(6, 75500308, 700, '2024-01-09 22:51:09', 2, NULL, 481527, 70481525, NULL, 'Chuyển khoản');
 
 -- --------------------------------------------------------
 
@@ -85,6 +90,16 @@ CREATE TABLE `feedback` (
   `KH_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `feedback`
+--
+
+INSERT INTO `feedback` (`FB_ID`, `FB_TIME`, `FB_RATING`, `FB_TEXT`, `KH_ID`) VALUES
+(645780, '2024-01-09 14:26:40', 4, 'Tôi đã ở khách sạn Hust Stay Smart trong 3 ngày và rất hài lòng với trải nghiệm của mình. Phòng ốc rộng rãi, thoáng mát, và có đầy đủ tiện nghi. Nhân viên phục vụ rất nhiệt tình và chu đáo. Tôi đặc biệt ấn tượng với dịch vụ giặt ủi của khách sạn, rất nhanh chóng và chất lượng.', 70203262),
+(1104010, '2024-01-09 14:27:50', 5, 'Khách sạn Hust Stay Smart là một lựa chọn tuyệt vời cho những ai đang tìm kiếm một nơi lưu trú giá cả phải chăng nhưng vẫn đảm bảo chất lượng. Phòng ốc sạch sẽ, gọn gàng, và nhân viên phục vụ rất thân thiện.', 70203262),
+(3790728, '2024-01-09 14:20:48', 5, 'Tốt', 70203676),
+(4955296, '2024-01-09 22:53:07', 5, 'Phòng và dịch vụ Tốt', 70481525);
+
 -- --------------------------------------------------------
 
 --
@@ -111,7 +126,9 @@ INSERT INTO `khachhang` (`KH_ID`, `KH_NAME`, `KH_SDT`, `KH_ADDRESS`, `KH_CCCD`, 
 (70203285, 'Viet', '01295918', '', '', 0, 'qangviet1234'),
 (70203676, 'Trương Quang Việt', '0347039025', '206 Đường Nguyễn Du, Quận Hoàn Kiếm, Thành phố Hà Nội', '001203021809', 0, 'abcd'),
 (70234360, 'Trương Quang Việt', '0129519518', '', '', 0, 'viet123456'),
-(70286743, 'Trương Quang Việt', '0345666544', '', '', 0, 'abcdef');
+(70286743, 'Trương Quang Việt', '0345666544', '', '', 0, 'abcdef'),
+(70479208, 'Nguyễn Văn Trí', '03412315169', '', '', 0, 'abcd1234'),
+(70481525, 'Nguyễn Văn A', '01258158', 'số 9999, đường A', '123115', 0, 'abcd12345');
 
 -- --------------------------------------------------------
 
@@ -166,10 +183,13 @@ CREATE TABLE `reservation` (
 --
 
 INSERT INTO `reservation` (`RESERVATION_ID`, `CheckInDate`, `CheckOutDate`, `KH_ID`, `ROOM_ID`, `NV_ID`, `RESERVATION_STATUS`, `create_at`) VALUES
+(200, '2024-01-10', '2024-01-13', 70479208, 509, NULL, 1, '2024-01-09 18:27:37'),
 (348869, '2023-12-27', '2023-12-29', 70203676, 109, 19726325, -1, '2023-12-30 09:51:39'),
 (417918, '2024-01-05', '2024-01-07', 70203676, 103, 19726325, 1, '2024-01-02 14:06:20'),
 (417931, '2024-01-04', '2024-01-05', 70203676, 103, 19726325, 1, '2024-01-02 14:08:32'),
-(447057, '2024-01-06', '2024-01-07', 70203676, 205, 19726325, 1, '2024-01-05 23:02:59');
+(447057, '2024-01-06', '2024-01-07', 70203676, 205, 19726325, 1, '2024-01-05 23:02:59'),
+(479210, '2024-01-12', '2024-01-14', 70479208, 104, 83423641, 1, '2024-01-09 16:21:49'),
+(481527, '2024-01-12', '2024-01-14', 70481525, 109, 83423641, 1, '2024-01-09 22:47:56');
 
 -- --------------------------------------------------------
 
@@ -181,59 +201,58 @@ CREATE TABLE `room` (
   `ROOM_ID` int(11) NOT NULL,
   `ROOM_TYPE` char(10) NOT NULL,
   `ROOM_PRICE` int(11) NOT NULL,
-  `ROOM_DESC` text NOT NULL
+  `ROOM_DESC` text NOT NULL,
+  `ROOM_LOCK` tinyint(4) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `room`
 --
 
-INSERT INTO `room` (`ROOM_ID`, `ROOM_TYPE`, `ROOM_PRICE`, `ROOM_DESC`) VALUES
-(101, 'Family', 300, 'Phòng Family rộng rãi và sang trọng, được trang bị đầy đủ tiện nghi hiện đại. Từ cửa sổ phòng, khách hàng có thể ngắm nhìn toàn cảnh thành phố.'),
-(102, 'Standard', 350, 'Phòng Standard là lựa chọn phổ biến cho các khách hàng có ngân sách hạn chế. Phòng được trang bị đầy đủ tiện nghi cơ bản và mang lại sự thoải mái cho khách hàng.'),
-(103, 'Superior', 310, 'Phòng Superior tiện nghi với giường queen-size, phòng tắm riêng và không gian thoải mái để nghỉ ngơi.'),
-(104, 'Executive', 219, 'Suite sang trọng với không gian phòng khách riêng biệt, giường king-size, phòng tắm với bồn tắm và các tiện nghi cao cấp. a\n '),
-(105, 'Family', 350, 'Phòng rộng rãi và thoải mái, phù hợp cho gia đình, với một giường đôi và hai giường đơn, phòng tắm riêng và không gian chung tiện nghi.\r\n'),
-(106, 'Ocean View', 316, 'Phòng với tầm nhìn ra biển tuyệt đẹp, bao gồm giường king-size, phòng tắm riêng và ban công riêng.\r\n'),
-(107, 'Standard', 244, 'Phòng Standard với không gian tầng lửng, giường king-size, phòng tắm riêng và khu vực nghỉ ngơi riêng biệt.'),
-(108, 'Standard', 327, 'Phòng tiêu chuẩn với giường đôi hoặc giường đơn, phòng tắm riêng và các tiện nghi cơ bản.'),
-(109, 'Superior', 350, 'Phòng với tầm nhìn ra khu vườn xanh mát, bao gồm giường king-size, phòng tắm riêng và không gian nghỉ ngơi riêng.'),
-(110, 'Superior', 409, 'Phòng Superior là sự kết hợp hoàn hảo giữa tiện nghi và giá trị. Với không gian thoáng đãng và nội thất tinh tế, phòng đáp ứng mọi nhu cầu của khách hàng.'),
-(201, 'Deluxe', 237, 'Phòng Deluxe rộng rãi và sang trọng, được trang bị giường King-size, TV màn hình phẳng, minibar và két an toàn. Phòng có khu vực làm việc riêng, kết nối Wi-Fi miễn phí và phòng tắm riêng với bồn tắm hoặc vòi sen.'),
-(202, 'Standard', 382, 'Phòng thoải mái và tiện nghi với giường Queen-size hoặc hai giường đơn, TV cáp, minibar và máy pha cà phê/ấm đun nước. Phòng có phòng tắm riêng với vòi sen và cung cấp dịch vụ phòng hàng ngày.\n'),
-(203, 'Executive', 388, 'Phòng Executive được thiết kế đặc biệt dành cho khách hàng doanh nhân. Ngoài các tiện ích của phòng Deluxe, phòng Executive còn có khu vực tiếp khách riêng, máy in, dịch vụ đặt vé và hướng dẫn du lịch. Khách hàng cũng được sử dụng miễn phí phòng họp trong một thời gian giới hạn.'),
-(204, 'Family', 241, 'Phòng rộng lớn với không gian sống riêng, phòng ngủ riêng và phòng tắm riêng. Phòng được trang bị ghế sofa, TV màn hình phẳng, minibar, máy pha cà phê/ấm đun nước và dịch vụ phòng hàng ngày. Khách hàng cũng nhận được dịch vụ đỗ xe và đưa đón sân bay miễn phí.'),
-(205, 'Family', 302, 'Phòng Family rộng rãi và thoải mái, phù hợp cho gia đình lưu trú. Phòng có giường King-size và giường đơn, TV cáp, minibar và phòng tắm riêng. Dịch vụ phòng hàng ngày và truyền hình cáp miễn phí cũng được cung cấp.'),
-(206, 'Deluxe', 338, 'Phòng nằm ở tầng cao với tầm nhìn toàn cảnh đẹp. Phòng được trang bị giường King-size, khu vực tiếp khách riêng, minibar, TV màn hình phẳng và phòng tắm riêng với bồn tắm. Khách hàng cũng có quyền sử dụng phòng họp và truy cập Wi-Fi miễn phí.'),
-(207, 'Superior', 288, 'Phòng Superior mang đến sự thoải mái và tiện nghi với giường King-size hoặc giường đơn, TV cáp, minibar và máy pha cà phê/ấm đun nước. Phòng có phòng tắm riêng với vòi sen và dịch vụ phòng hàng ngày.\r\n'),
-(208, 'Superior', 386, 'Phòng được thiết kế hiện đại với không gian mở, bao gồm khu vực ngủ với giường King-size hoặc giường đơn, khu vực tiếp khách với ghế sofa và TV mànhình phẳng, minibar và khu vực bếp nhỏ với lò vi sóng và tủ lạnh. Phòng cũng có phòng tắm riêng với vòi sen và cung cấp dịch vụ phòng hàng ngày.'),
-(209, 'Deluxe', 496, 'Phòng được thiết kế lãng mạn và sang trọng cho các cặp đôi. Phòng có giường King-size, khu vực tiếp khách riêng, TV màn hình phẳng, minibar và phòng tắm riêng với bồn tắm. Khách hàng cũng nhận được dịch vụ phòng hàng ngày và truyền hình cáp miễn phí.'),
-(210, 'Executive', 454, 'Phòng là biểu tượng của sự xa hoa và đẳng cấp. Phòng có không gian rộng lớn với phòng ngủ riêng, phòng khách, phòng ăn và ban công riêng. Phòng được trang bị ghế sofa, TV màn hình phẳng, minibar, máy pha cà phê/ấm đun nước và phòng tắm riêng với bồn tắm. Dịch vụ phòng hàng ngày, truyền hình cáp và truy cập Wi-Fi miễn phí cũng được cung cấp.'),
-(301, 'Superior', 339, 'Phòng mang đến tầm nhìn tuyệt đẹp ra biển. Phòng có giường King-size, ban công riêng, minibar, TV màn hình phẳng và phòng tắm riêng với bồn tắm. Khách hàng cũng nhận được dịch vụ phòng hàng ngày và truyền hình cáp miễn phí.'),
-(302, 'Family', 376, 'Phòng Family là một sự lựa chọn lý tưởng cho gia đình lớn. Phòng có hai phòng ngủ riêng biệt, phòng khách với TV màn hình phẳng, minibar và máy pha cà phê/ấm đun nước. Phòng cũng có phòng tắm riêng với vòi sen và cung cấp dịch vụ phòng hàng ngày.\nPhòng Duplex:'),
-(303, 'Deluxe', 458, 'Phòng Deluxe View cho phép khách hàng ngắm nhìn toàn cảnh thành phố từ cửa sổ. Phòng có giường King-size hoặc giường đơn, minibar, TV màn hình phẳng và phòng tắm riêng với vòi sen. Dịch vụ phòng hàng ngày và truyền hình cáp miễn phí cũng được cung cấp.'),
-(304, 'Deluxe', 380, 'Phòng Garden View mang đến tầm nhìn đẹp về khu vườn xanh mát. Phòng có giường King-size hoặc giường đơn, minibar, TV màn hình phẳng và phòng tắm riêng với vòi sen. Dịch vụ phòng hàng ngày và truyền hình cáp miễn phí cũng được cung cấp.'),
-(305, 'Standard', 298, 'Phòng rộng rãi và thoải mái, phù hợp cho gia đình lưu trú. Phòng có giường King-size và giường đơn, TV cáp, minibar và phòng tắm riêng. Dịch vụ phòng hàng ngày và truyền hình cáp miễn phí cũng được cung cấp.'),
-(306, 'Executive', 397, 'Giường đôi rộng, phòng khách riêng, phòng tắm rộng, tủ quần áo lớn, bàn làm việc, tivi màn hình phẳng lớn, điều hòa, minibar đầy đủ, phòng ăn riêng, kem, wifi, jacuzzi'),
-(307, 'Superior', 337, '2 giường đơn rộng, phòng khách riêng rộng, 2 phòng tắm rộng, tủ quần áo lớn, 2 bàn làm việc, tivi màn hình phẳng lớn, điều hòa, minibar đầy đủ, phòng ăn riêng, jacuzzi, kem, wifi'),
-(308, 'Executive', 473, 'Giường đơn rộng, phòng làm việc riêng đầy đủ trang thiết bị, phòng tắm rộng, tủ quần áo lớn, bàn Phòng làm việc đầy đủ, tivi màn hình phẳng lớn, điều hòa, minibar, bàn ăn riêng, kem, wifi, jacuzzi'),
-(309, 'Deluxe', 346, '2 giường đơn rộng, phòng khách kiêm phòng làm việc riêng đầy đủ trang thiết bị, 2 phòng tắm rộng, tủ quần áo lớn, 2 bàn làm việc đầy đủ, tivi, điều hòa, minibar, bàn ăn riêng, jacuzzi, kem, wifi'),
-(310, 'Superior', 393, 'Giường đôi rộng design sang trọng, phòng khách rộng, phòng làm việc riêng, phòng tắm hồ bơi, tủ quần áo lớn, bàn làm việc hiện đại, tivi tỷ lệ màn hình lớn nhất, điều hòa, phòng ăn riêng, phòng giải trí, minibar, jacuzzi trong phòng, dịch vụ đầy đủ, kem cao cấp, wifi tốc độ cao\r\n'),
-(401, 'Standard', 430, 'Giường đơn rộng, phòng khách riêng nhỏ, phòng tắm rộng với bồn tắm, tủ quần áo lớn, bàn làm việc, tivi màn hình phẳng lớn, điều hòa, minibar đầy đủ, kem, wifi, jacuzzi trong phòng'),
-(402, 'Executive', 380, '2 giường đơn rộng, phòng khách riêng rộng, 2 phòng tắm rộng với bồn tắm, tủ quần áo lớn, bàn làm việc đôi, tivi màn hình phẳng lớn, điều hòa, minibar đầy đủ, phòng ăn riêng, jacuzzi trong phòng, kem, wifi'),
-(403, 'Superior', 484, 'Giường đơn rộng sâu, phòng khách riêng đẹp, phòng làm việc riêng đầy đủ trang thiết bị, phòng tắm sang trọng, tủ quần áo lớn, bàn làm việc hiện đại, tivi màn hình phẳng lớn, điều hòa, minibar, phòng ăn riêng, kem miễn phí, wifi'),
-(404, 'Executive', 564, '2 giường đơn rộng sâu, phòng khách riêng sang trọng, phòng làm việc chung đầy đủ trang thiết bị, 2 phòng tắm sang trọng, tủ quần áo lớn, 2 bàn làm việc hiện đại, tivi màn hình phẳng lớn, điều hòa, minibar, phòng ăn riêng, kem miễn phí, wifi, bồn tắm hơi'),
-(405, 'Standard', 497, 'Phòng thoải mái và tiện nghi với giường Queen-size hoặc hai giường đơn, TV cáp, minibar và máy pha cà phê/ấm đun nước. Phòng có phòng tắm riêng với vòi sen và cung cấp dịch vụ phòng hàng ngày.\r\n'),
-(406, 'Deluxe', 371, 'Phòng rộng lớn với không gian sống riêng, phòng ngủ riêng và phòng tắm riêng. Phòng được trang bị ghế sofa, TV màn hình phẳng, minibar, máy pha cà phê/ấm đun nước và dịch vụ phòng hàng ngày. Khách hàng cũng nhận được dịch vụ đỗ xe và đưa đón sân bay miễn phí.'),
-(407, 'Superior', 474, 'Phòng được thiết kế hiện đại với không gian mở, bao gồm khu vực ngủ với giường King-size hoặc giường đơn, khu vực tiếp khách với ghế sofa và TV mànhình phẳng, minibar và khu vực bếp nhỏ với lò vi sóng và tủ lạnh. Phòng cũng có phòng tắm riêng với vòi sen và cung cấp dịch vụ phòng hàng ngày.'),
-(408, 'Family', 452, 'Phòng Family là một sự lựa chọn lý tưởng cho gia đình lớn. Phòng có hai phòng ngủ riêng biệt, phòng khách với TV màn hình phẳng, minibar và máy pha cà phê/ấm đun nước. Phòng cũng có phòng tắm riêng với vòi sen và cung cấp dịch vụ phòng hàng ngày.\r\nPhòng Duplex:'),
-(409, 'Standard', 395, 'Phòng rộng rãi và thoải mái, phù hợp cho gia đình lưu trú. Phòng có giường King-size và giường đơn, TV cáp, minibar và phòng tắm riêng. Dịch vụ phòng hàng ngày và truyền hình cáp miễn phí cũng được cung cấp.'),
-(410, 'Superior', 265, 'Phòng rộng rãi và thoải mái, phù hợp cho gia đình lưu trú. Phòng có giường King-size và giường đơn, TV cáp, minibar và phòng tắm riêng. Dịch vụ phòng hàng ngày và truyền hình cáp miễn phí cũng được cung cấp.'),
-(509, 'Test', 1000, 'Test'),
-(510, 'Test', 1000, 'Test'),
-(555, 'Deluxy', 1, 'Test'),
-(601, 'Test', 1000, 'Test'),
-(701, 'Test', 1, 'Test');
+INSERT INTO `room` (`ROOM_ID`, `ROOM_TYPE`, `ROOM_PRICE`, `ROOM_DESC`, `ROOM_LOCK`) VALUES
+(101, 'Family', 300, 'Phòng Family rộng rãi và sang trọng, được trang bị đầy đủ tiện nghi hiện đại. Từ cửa sổ phòng, khách hàng có thể ngắm nhìn toàn cảnh thành phố.', 1),
+(102, 'Standard', 350, 'Phòng Standard là lựa chọn phổ biến cho các khách hàng có ngân sách hạn chế. Phòng được trang bị đầy đủ tiện nghi cơ bản và mang lại sự thoải mái cho khách hàng.', 1),
+(103, 'Superior', 310, 'Phòng Superior tiện nghi với giường queen-size, phòng tắm riêng và không gian thoải mái để nghỉ ngơi.', 1),
+(104, 'Executive', 219, 'Suite sang trọng với không gian phòng khách riêng biệt, giường king-size, phòng tắm với bồn tắm và các tiện nghi cao cấp. a\n ', 1),
+(105, 'Family', 350, 'Phòng rộng rãi và thoải mái, phù hợp cho gia đình, với một giường đôi và hai giường đơn, phòng tắm riêng và không gian chung tiện nghi.\r\n', 1),
+(106, 'Ocean View', 316, 'Phòng với tầm nhìn ra biển tuyệt đẹp, bao gồm giường king-size, phòng tắm riêng và ban công riêng.\r\n', 1),
+(107, 'Standard', 244, 'Phòng Standard với không gian tầng lửng, giường king-size, phòng tắm riêng và khu vực nghỉ ngơi riêng biệt.', 1),
+(108, 'Standard', 327, 'Phòng tiêu chuẩn với giường đôi hoặc giường đơn, phòng tắm riêng và các tiện nghi cơ bản.', 1),
+(109, 'Superior', 350, 'Phòng với tầm nhìn ra khu vườn xanh mát, bao gồm giường king-size, phòng tắm riêng và không gian nghỉ ngơi riêng.', 1),
+(110, 'Superior', 409, 'Phòng Superior là sự kết hợp hoàn hảo giữa tiện nghi và giá trị. Với không gian thoáng đãng và nội thất tinh tế, phòng đáp ứng mọi nhu cầu của khách hàng.', 1),
+(201, 'Deluxe', 237, 'Phòng Deluxe rộng rãi và sang trọng, được trang bị giường King-size, TV màn hình phẳng, minibar và két an toàn. Phòng có khu vực làm việc riêng, kết nối Wi-Fi miễn phí và phòng tắm riêng với bồn tắm hoặc vòi sen.', 1),
+(202, 'Standard', 382, 'Phòng thoải mái và tiện nghi với giường Queen-size hoặc hai giường đơn, TV cáp, minibar và máy pha cà phê/ấm đun nước. Phòng có phòng tắm riêng với vòi sen và cung cấp dịch vụ phòng hàng ngày.\n', 1),
+(203, 'Executive', 388, 'Phòng Executive được thiết kế đặc biệt dành cho khách hàng doanh nhân. Ngoài các tiện ích của phòng Deluxe, phòng Executive còn có khu vực tiếp khách riêng, máy in, dịch vụ đặt vé và hướng dẫn du lịch. Khách hàng cũng được sử dụng miễn phí phòng họp trong một thời gian giới hạn.', 1),
+(204, 'Family', 241, 'Phòng rộng lớn với không gian sống riêng, phòng ngủ riêng và phòng tắm riêng. Phòng được trang bị ghế sofa, TV màn hình phẳng, minibar, máy pha cà phê/ấm đun nước và dịch vụ phòng hàng ngày. Khách hàng cũng nhận được dịch vụ đỗ xe và đưa đón sân bay miễn phí.', 1),
+(205, 'Family', 302, 'Phòng Family rộng rãi và thoải mái, phù hợp cho gia đình lưu trú. Phòng có giường King-size và giường đơn, TV cáp, minibar và phòng tắm riêng. Dịch vụ phòng hàng ngày và truyền hình cáp miễn phí cũng được cung cấp.', 1),
+(206, 'Deluxe', 338, 'Phòng nằm ở tầng cao với tầm nhìn toàn cảnh đẹp. Phòng được trang bị giường King-size, khu vực tiếp khách riêng, minibar, TV màn hình phẳng và phòng tắm riêng với bồn tắm. Khách hàng cũng có quyền sử dụng phòng họp và truy cập Wi-Fi miễn phí.', 1),
+(207, 'Superior', 288, 'Phòng Superior mang đến sự thoải mái và tiện nghi với giường King-size hoặc giường đơn, TV cáp, minibar và máy pha cà phê/ấm đun nước. Phòng có phòng tắm riêng với vòi sen và dịch vụ phòng hàng ngày.\r\n', 1),
+(208, 'Superior', 386, 'Phòng được thiết kế hiện đại với không gian mở, bao gồm khu vực ngủ với giường King-size hoặc giường đơn, khu vực tiếp khách với ghế sofa và TV mànhình phẳng, minibar và khu vực bếp nhỏ với lò vi sóng và tủ lạnh. Phòng cũng có phòng tắm riêng với vòi sen và cung cấp dịch vụ phòng hàng ngày.', 1),
+(209, 'Deluxe', 496, 'Phòng được thiết kế lãng mạn và sang trọng cho các cặp đôi. Phòng có giường King-size, khu vực tiếp khách riêng, TV màn hình phẳng, minibar và phòng tắm riêng với bồn tắm. Khách hàng cũng nhận được dịch vụ phòng hàng ngày và truyền hình cáp miễn phí.', 1),
+(210, 'Executive', 454, 'Phòng là biểu tượng của sự xa hoa và đẳng cấp. Phòng có không gian rộng lớn với phòng ngủ riêng, phòng khách, phòng ăn và ban công riêng. Phòng được trang bị ghế sofa, TV màn hình phẳng, minibar, máy pha cà phê/ấm đun nước và phòng tắm riêng với bồn tắm. Dịch vụ phòng hàng ngày, truyền hình cáp và truy cập Wi-Fi miễn phí cũng được cung cấp.', 1),
+(301, 'Superior', 339, 'Phòng mang đến tầm nhìn tuyệt đẹp ra biển. Phòng có giường King-size, ban công riêng, minibar, TV màn hình phẳng và phòng tắm riêng với bồn tắm. Khách hàng cũng nhận được dịch vụ phòng hàng ngày và truyền hình cáp miễn phí.', 1),
+(302, 'Family', 376, 'Phòng Family là một sự lựa chọn lý tưởng cho gia đình lớn. Phòng có hai phòng ngủ riêng biệt, phòng khách với TV màn hình phẳng, minibar và máy pha cà phê/ấm đun nước. Phòng cũng có phòng tắm riêng với vòi sen và cung cấp dịch vụ phòng hàng ngày.\nPhòng Duplex:', 1),
+(303, 'Deluxe', 458, 'Phòng Deluxe View cho phép khách hàng ngắm nhìn toàn cảnh thành phố từ cửa sổ. Phòng có giường King-size hoặc giường đơn, minibar, TV màn hình phẳng và phòng tắm riêng với vòi sen. Dịch vụ phòng hàng ngày và truyền hình cáp miễn phí cũng được cung cấp.', 1),
+(304, 'Deluxe', 380, 'Phòng Garden View mang đến tầm nhìn đẹp về khu vườn xanh mát. Phòng có giường King-size hoặc giường đơn, minibar, TV màn hình phẳng và phòng tắm riêng với vòi sen. Dịch vụ phòng hàng ngày và truyền hình cáp miễn phí cũng được cung cấp.', 1),
+(305, 'Standard', 298, 'Phòng rộng rãi và thoải mái, phù hợp cho gia đình lưu trú. Phòng có giường King-size và giường đơn, TV cáp, minibar và phòng tắm riêng. Dịch vụ phòng hàng ngày và truyền hình cáp miễn phí cũng được cung cấp.', 1),
+(306, 'Executive', 397, 'Giường đôi rộng, phòng khách riêng, phòng tắm rộng, tủ quần áo lớn, bàn làm việc, tivi màn hình phẳng lớn, điều hòa, minibar đầy đủ, phòng ăn riêng, kem, wifi, jacuzzi', 1),
+(307, 'Superior', 337, '2 giường đơn rộng, phòng khách riêng rộng, 2 phòng tắm rộng, tủ quần áo lớn, 2 bàn làm việc, tivi màn hình phẳng lớn, điều hòa, minibar đầy đủ, phòng ăn riêng, jacuzzi, kem, wifi', 1),
+(308, 'Executive', 473, 'Giường đơn rộng, phòng làm việc riêng đầy đủ trang thiết bị, phòng tắm rộng, tủ quần áo lớn, bàn Phòng làm việc đầy đủ, tivi màn hình phẳng lớn, điều hòa, minibar, bàn ăn riêng, kem, wifi, jacuzzi', 1),
+(309, 'Deluxe', 346, '2 giường đơn rộng, phòng khách kiêm phòng làm việc riêng đầy đủ trang thiết bị, 2 phòng tắm rộng, tủ quần áo lớn, 2 bàn làm việc đầy đủ, tivi, điều hòa, minibar, bàn ăn riêng, jacuzzi, kem, wifi', 1),
+(310, 'Superior', 393, 'Giường đôi rộng design sang trọng, phòng khách rộng, phòng làm việc riêng, phòng tắm hồ bơi, tủ quần áo lớn, bàn làm việc hiện đại, tivi tỷ lệ màn hình lớn nhất, điều hòa, phòng ăn riêng, phòng giải trí, minibar, jacuzzi trong phòng, dịch vụ đầy đủ, kem cao cấp, wifi tốc độ cao\r\n', 1),
+(401, 'Standard', 430, 'Giường đơn rộng, phòng khách riêng nhỏ, phòng tắm rộng với bồn tắm, tủ quần áo lớn, bàn làm việc, tivi màn hình phẳng lớn, điều hòa, minibar đầy đủ, kem, wifi, jacuzzi trong phòng', 1),
+(402, 'Executive', 380, '2 giường đơn rộng, phòng khách riêng rộng, 2 phòng tắm rộng với bồn tắm, tủ quần áo lớn, bàn làm việc đôi, tivi màn hình phẳng lớn, điều hòa, minibar đầy đủ, phòng ăn riêng, jacuzzi trong phòng, kem, wifi', 1),
+(403, 'Superior', 484, 'Giường đơn rộng sâu, phòng khách riêng đẹp, phòng làm việc riêng đầy đủ trang thiết bị, phòng tắm sang trọng, tủ quần áo lớn, bàn làm việc hiện đại, tivi màn hình phẳng lớn, điều hòa, minibar, phòng ăn riêng, kem miễn phí, wifi', 1),
+(404, 'Executive', 564, '2 giường đơn rộng sâu, phòng khách riêng sang trọng, phòng làm việc chung đầy đủ trang thiết bị, 2 phòng tắm sang trọng, tủ quần áo lớn, 2 bàn làm việc hiện đại, tivi màn hình phẳng lớn, điều hòa, minibar, phòng ăn riêng, kem miễn phí, wifi, bồn tắm hơi', 1),
+(405, 'Standard', 497, 'Phòng thoải mái và tiện nghi với giường Queen-size hoặc hai giường đơn, TV cáp, minibar và máy pha cà phê/ấm đun nước. Phòng có phòng tắm riêng với vòi sen và cung cấp dịch vụ phòng hàng ngày.\r\n', 1),
+(406, 'Deluxe', 371, 'Phòng rộng lớn với không gian sống riêng, phòng ngủ riêng và phòng tắm riêng. Phòng được trang bị ghế sofa, TV màn hình phẳng, minibar, máy pha cà phê/ấm đun nước và dịch vụ phòng hàng ngày. Khách hàng cũng nhận được dịch vụ đỗ xe và đưa đón sân bay miễn phí.', 1),
+(407, 'Superior', 474, 'Phòng được thiết kế hiện đại với không gian mở, bao gồm khu vực ngủ với giường King-size hoặc giường đơn, khu vực tiếp khách với ghế sofa và TV mànhình phẳng, minibar và khu vực bếp nhỏ với lò vi sóng và tủ lạnh. Phòng cũng có phòng tắm riêng với vòi sen và cung cấp dịch vụ phòng hàng ngày.', 1),
+(408, 'Family', 452, 'Phòng Family là một sự lựa chọn lý tưởng cho gia đình lớn. Phòng có hai phòng ngủ riêng biệt, phòng khách với TV màn hình phẳng, minibar và máy pha cà phê/ấm đun nước. Phòng cũng có phòng tắm riêng với vòi sen và cung cấp dịch vụ phòng hàng ngày.\r\nPhòng Duplex:', 1),
+(409, 'Standard', 395, 'Phòng rộng rãi và thoải mái, phù hợp cho gia đình lưu trú. Phòng có giường King-size và giường đơn, TV cáp, minibar và phòng tắm riêng. Dịch vụ phòng hàng ngày và truyền hình cáp miễn phí cũng được cung cấp.', 1),
+(410, 'Superior', 265, 'Phòng rộng rãi và thoải mái, phù hợp cho gia đình lưu trú. Phòng có giường King-size và giường đơn, TV cáp, minibar và phòng tắm riêng. Dịch vụ phòng hàng ngày và truyền hình cáp miễn phí cũng được cung cấp.', 1),
+(509, 'Test', 1000, 'Test', 1),
+(555, 'Deluxy', 1, 'Test', 1),
+(601, 'Test', 1000, 'Test', 1);
 
 -- --------------------------------------------------------
 
@@ -245,19 +264,20 @@ CREATE TABLE `service` (
   `SERVICE_ID` int(11) NOT NULL,
   `SERVICE_NAME` varchar(50) NOT NULL,
   `SERVICE_PRICE` int(11) NOT NULL,
-  `SERVICE_DESC` text NOT NULL
+  `SERVICE_DESC` text NOT NULL,
+  `SERVICE_LOCK` tinyint(4) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `service`
 --
 
-INSERT INTO `service` (`SERVICE_ID`, `SERVICE_NAME`, `SERVICE_PRICE`, `SERVICE_DESC`) VALUES
-(1, 'Bữa trưa - 1', 60, 'Đặt bữa trưa theo từng mâm (6,7 người/1 mâm) bao gồm các món:\n- Món chính: Thịt gà, thịt bò, thịt lợn, hải sản,...\n- Món phụ: Rau củ, cơm, bún, phở,...\n- Món tráng miệng: Trái cây, chè, bánh ngọt,...'),
-(2, 'Bữa trưa - 2', 80, 'Đặt bữa trưa theo từng mâm (6,7 người/1 mâm) bao gồm các món:\r\n- Món khai vị: Gỏi, salad, súp,...\r\n- Món chính: Thịt gà, thịt bò, thịt lợn, hải sản,...\r\n- Món phụ: Rau củ, cơm, bún, phở,...\r\n- Món tráng miệng: Trái cây, chè, bánh ngọt,...'),
-(3, 'Bữa tối - 1', 60, 'Đặt bữa trưa theo từng mâm (6,7 người/1 mâm) bao gồm các món:\n- Món chính: Thịt gà, thịt bò, thịt lợn, hải sản,...\n- Món phụ: Rau củ, cơm, bún, phở,...\n- Món tráng miệng: Trái cây, chè, bánh ngọt,...'),
-(4, 'Bữa tối - 2', 80, 'Đặt bữa trưa theo từng mâm (6,7 người/1 mâm) bao gồm các món:\n- Món khai vị: Gỏi, salad, súp,...\n- Món chính: Thịt gà, thịt bò, thịt lợn, hải sản,...\n- Món phụ: Rau củ, cơm, bún, phở,...\n- Món tráng miệng: Trái cây, chè, bánh ngọt, rượu chè'),
-(5, 'Xe đưa đón', 10, 'Xe đón từ sân bay tới khách sạn\nXe đưa từ khách sạn tới sân bay');
+INSERT INTO `service` (`SERVICE_ID`, `SERVICE_NAME`, `SERVICE_PRICE`, `SERVICE_DESC`, `SERVICE_LOCK`) VALUES
+(1, 'Bữa trưa - 1', 60, 'Đặt bữa trưa theo từng mâm (6,7 người/1 mâm) bao gồm các món:\n- Món chính: Thịt gà, thịt bò, thịt lợn, hải sản,...\n- Món phụ: Rau củ, cơm, bún, phở,...\n- Món tráng miệng: Trái cây, chè, bánh ngọt,...', 1),
+(2, 'Bữa trưa - 2', 80, 'Đặt bữa trưa theo từng mâm (6,7 người/1 mâm) bao gồm các món:\r\n- Món khai vị: Gỏi, salad, súp,...\r\n- Món chính: Thịt gà, thịt bò, thịt lợn, hải sản,...\r\n- Món phụ: Rau củ, cơm, bún, phở,...\r\n- Món tráng miệng: Trái cây, chè, bánh ngọt,...', 1),
+(3, 'Bữa tối - 1', 60, 'Đặt bữa trưa theo từng mâm (6,7 người/1 mâm) bao gồm các món:\n- Món chính: Thịt gà, thịt bò, thịt lợn, hải sản,...\n- Món phụ: Rau củ, cơm, bún, phở,...\n- Món tráng miệng: Trái cây, chè, bánh ngọt,...', 1),
+(4, 'Bữa tối - 2', 80, 'Đặt bữa trưa theo từng mâm (6,7 người/1 mâm) bao gồm các món:\n- Món khai vị: Gỏi, salad, súp,...\n- Món chính: Thịt gà, thịt bò, thịt lợn, hải sản,...\n- Món phụ: Rau củ, cơm, bún, phở,...\n- Món tráng miệng: Trái cây, chè, bánh ngọt, rượu chè', 1),
+(5, 'Xe đưa đón', 10, 'Xe đón từ sân bay tới khách sạn\nXe đưa từ khách sạn tới sân bay', 1);
 
 -- --------------------------------------------------------
 
@@ -281,13 +301,15 @@ CREATE TABLE `service_history` (
 --
 
 INSERT INTO `service_history` (`SH_ID`, `KH_ID`, `SERVICE_ID`, `QUANTITY`, `DATE`, `TIME`, `TOTAL_PRICE`, `STATUS`) VALUES
+(197940, 70481525, 2, 3, '2024-01-12', '23:48:00', 240, -1),
 (1704307, 70203676, 3, 1, '2024-01-03', '07:48:00', 60, 1),
 (2144915, 70203676, 2, 2, '2024-01-06', '00:20:00', 160, -1),
 (3771894, 70203676, 2, 1, '2024-01-05', '11:16:00', 80, 1),
 (7043074, 70203676, 5, 2, '2024-01-04', '09:49:00', 20, -1),
 (7043366, 70203676, 2, 2, '2024-01-04', '11:50:00', 160, 1),
 (7043371, 70203676, 3, 2, '2024-01-03', '00:58:00', 120, 1),
-(7043418, 70203676, 1, 1, '2024-01-04', '11:16:00', 60, 1);
+(7043418, 70203676, 1, 1, '2024-01-04', '11:16:00', 60, 1),
+(8762617, 70479208, 1, 5, '2024-01-12', '16:29:00', 300, -1);
 
 -- --------------------------------------------------------
 
@@ -307,6 +329,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`USER_NAME`, `USER_PASS`, `USER_IDENTITY`) VALUES
 ('abcd', '1234', 1),
+('abcd1234', 'abcd1234', 1),
+('abcd12345', '12345', 1),
 ('abcdef', '123456', 1),
 ('admin', 'admin', 3),
 ('nhanvien1', 'nhanvien1', 2),
@@ -339,7 +363,7 @@ ALTER TABLE `admin`
 -- Indexes for table `bill`
 --
 ALTER TABLE `bill`
-  ADD PRIMARY KEY (`BILL_ID`),
+  ADD PRIMARY KEY (`ID`),
   ADD KEY `SH_ID` (`SH_ID`),
   ADD KEY `COUPON_ID` (`COUPON_ID`),
   ADD KEY `KH_ID` (`KH_ID`),
@@ -409,6 +433,16 @@ ALTER TABLE `service_history`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`USER_NAME`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `bill`
+--
+ALTER TABLE `bill`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
