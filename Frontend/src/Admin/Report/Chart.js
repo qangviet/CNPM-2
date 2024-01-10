@@ -146,7 +146,18 @@ const Chart = (pros) => {
             },
         },
     };
-
+    const options3 = {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: "right",
+            },
+            title: {
+                display: true,
+                text: "Tổng doanh thu từng tháng",
+            },
+        },
+    };
     return (
         <>
             <div className="row-1">
@@ -159,7 +170,7 @@ const Chart = (pros) => {
             </div>
             <div className="row-2">
                 <div className="chart-container">
-                    {dataChart3 && <Line options={options1} data={dataChart3} />}
+                    {dataChart3 && <Line options={options3} data={dataChart3} />}
                 </div>
             </div>
         </>
