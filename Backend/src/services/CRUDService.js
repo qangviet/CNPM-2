@@ -121,6 +121,41 @@ const deleteService = async (data) => {
     }
 };
 
+/**
+ *
+ * @param {id, lock} data
+ * @returns
+ */
+
+const lockService = async (data) => {
+    try {
+        await connection.query(
+            `update service
+            set SERVICE_LOCK = ?
+            where SERVICE_ID = ?`,
+            [data.lock, data.id]
+        );
+        let EM;
+        if (data.lock === 1) {
+            EM = "Đã mở khóa dịch vụ thành công!";
+        } else {
+            EM = "Đã khóa dịch vụ thành công!";
+        }
+        return {
+            EM,
+            EC: "0",
+            DT: "",
+        };
+    } catch (error) {
+        console.log(error);
+        return {
+            EM: "database is error",
+            EC: "-1",
+            DT: "",
+        };
+    }
+};
+
 const updateService = async (data) => {
     try {
         await connection.query(
@@ -149,4 +184,5 @@ module.exports = {
     createService,
     deleteService,
     updateService,
+    lockService,
 };

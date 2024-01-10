@@ -83,7 +83,8 @@ const history = async (data) => {
                 TIME as time, TOTAL_PRICE as totalPrice, STATUS as status
             from service_history sh 
                 join service s on sh.SERVICE_ID = s.SERVICE_ID
-            where KH_ID = ?`,
+            where KH_ID = ?
+            order by DATE asc, TIME asc `,
             [data.khID]
         );
         return {

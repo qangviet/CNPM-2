@@ -171,8 +171,8 @@ const ManageService = () => {
         if (lock) {
             return (
                 <>
-                    <h3>Xác nhận khóa phòng</h3>
-                    <p>Phòng sẽ không hiển thị để đặt phòng?</p>
+                    <h3>Xác nhận khóa dịch vụ</h3>
+                    <p>Dịch vụ sẽ không hiển thị để đặt dịch vụ?</p>
                     <div className="element-form">
                         <button className="btn-create" onClick={() => handleLock(0)}>
                             Khóa
@@ -186,8 +186,8 @@ const ManageService = () => {
         } else
             return (
                 <>
-                    <h3>Xác nhận mở khóa phòng</h3>
-                    <p>Phòng sẽ được đưa vào sử dụng?</p>
+                    <h3>Xác nhận mở khóa dịch vụ</h3>
+                    <p>Dịch vụ sẽ được đưa vào sử dụng?</p>
                     <div className="element-form">
                         <button className="btn-create" onClick={() => handleLock(1)}>
                             Mở khóa
@@ -207,10 +207,24 @@ const ManageService = () => {
     };
 
     const closeModalLock = () => {
+        setId(0);
+        setLock(1);
         setModalLock(false);
     };
 
-    const handleLock = () => {};
+    const handleLock = async (lock) => {
+        let res = await axios.post("http://localhost:8088/api/crud-service/lock", {
+            id: id,
+            lock: lock,
+        });
+        if (res.data.EC === "0") {
+            toast.success(res.data.EM);
+            setEffect((prev) => prev + 1);
+            closeModalLock();
+        } else {
+            toast.error(res.data.EM);
+        }
+    };
 
     return (
         <React.Fragment>

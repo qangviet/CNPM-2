@@ -12,7 +12,13 @@ import { createRoom, readRoom, deleteRoom, updateRoom, lockRoom } from "../servi
 
 import { userInfo, editProfile, changePassword } from "../services/EditProfile";
 
-import { readService, createService, deleteService, updateService } from "../services/CRUDService";
+import {
+    readService,
+    createService,
+    deleteService,
+    updateService,
+    lockService,
+} from "../services/CRUDService";
 import sharp from "sharp";
 import fs from "node:fs";
 
@@ -363,6 +369,24 @@ const getBookHistory = async (req, res) => {
     }
 };
 
+const handleLockService = async (req, res) => {
+    try {
+        let data = await lockService(req.body);
+        return res.status(200).json({
+            EM: data.EM,
+            EC: data.EC,
+            DT: data.DT,
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            EM: "error from server",
+            EC: "-1",
+            DT: "",
+        });
+    }
+};
+
 const getServiceData = async (req, res) => {
     try {
         let data = await readService();
@@ -473,6 +497,7 @@ module.exports = {
     handleEditProfile,
     getBookHistory,
     getServiceData,
+    handleLockService,
     handleCreateService,
     handleDeleteService,
     handleUpdateService,

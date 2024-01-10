@@ -47,6 +47,7 @@ const ConfirmPayment = () => {
 
     const convertDate = (input) => {
         const date = new Date(input);
+        console.log(date);
         let day = date.getDate().toString();
         let month = (date.getMonth() + 1).toString();
         const year = date.getFullYear();
@@ -59,8 +60,8 @@ const ConfirmPayment = () => {
         return `${day}-${month}-${year}`;
     };
 
-    const convertDate2 = (originalTime) => {
-        let date = new Date(originalTime);
+    const convertDate2 = (input) => {
+        let date = new Date(input);
         let day = String(date.getDate()).padStart(2, "0");
         let month = String(date.getMonth() + 1).padStart(2, "0");
         let year = date.getFullYear();
@@ -79,6 +80,10 @@ const ConfirmPayment = () => {
         let minutes = String(date.getMinutes()).padStart(2, "0");
         let seconds = String(date.getSeconds()).padStart(2, "0");
         return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    };
+
+    const getDate1 = () => {
+        return billTime.substring(8, 18);
     };
 
     const customStyles = {
@@ -211,7 +216,7 @@ const ConfirmPayment = () => {
         }
         closeModalInvoice();
     };
-
+    console.log(billTime);
     if (dataBill) {
         return (
             <React.Fragment>
@@ -225,8 +230,8 @@ const ConfirmPayment = () => {
                         <h1>HUST STAY SMART</h1>
                         <div>
                             <p>Invoice #: {billID} </p>
-                            <p>Created: {convertDate(billTime)}</p>
-                            <p>Due: {convertDate(billTime)}</p>
+                            <p>Created: {getDate1()}</p>
+                            <p>Due: {getDate1()}</p>
                         </div>
                     </div>
                     <div className="invoice-user-info">
@@ -269,9 +274,7 @@ const ConfirmPayment = () => {
                         </div>
                         <div className="element-form">
                             <label style={{ width: "170px" }}>Thời gian: </label>
-                            <i style={{ padding: "9px", fontSize: "15px" }}>
-                                {convertDate2(billTime)}
-                            </i>
+                            <i style={{ padding: "9px", fontSize: "15px" }}>{billTime}</i>
                         </div>
                         <div className="emloyee-container-btn">
                             <button className="employee-btn-confirm" onClick={handleConfirmBill}>
@@ -331,8 +334,8 @@ const ConfirmPayment = () => {
                                                         <tr key={i2}>
                                                             <td>{r.roomID}</td>
                                                             <td>{r.roomType}</td>
-                                                            <td>{convertDate(r.checkIn)}</td>
-                                                            <td>{convertDate(r.checkOut)}</td>
+                                                            <td>{r.checkIn}</td>
+                                                            <td>{r.checkOut}</td>
                                                             <td>{r.roomPrice}</td>
                                                             <td>{r.total}</td>
                                                         </tr>
@@ -358,7 +361,7 @@ const ConfirmPayment = () => {
                                                         <tr key={i3}>
                                                             <td>{s.sName}</td>
                                                             <td>{s.quantity}</td>
-                                                            <td>{convertDate(s.date)}</td>
+                                                            <td>{s.date}</td>
                                                             <td>{s.time}</td>
                                                             <td>{s.sPrice}</td>
                                                             <td>{s.total}</td>

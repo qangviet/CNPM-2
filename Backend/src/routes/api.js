@@ -4,6 +4,7 @@ import apiController from "../controllers/apiController";
 import apiController2 from "../controllers/apiController2";
 import apiController3 from "../controllers/apiController3";
 import feedbackController from "../controllers/feedbackController";
+import reportController from "../controllers/reportController";
 import multer from "multer";
 const path = require("path");
 
@@ -46,6 +47,7 @@ const initApiRoutes = (app) => {
     router.post("/crud-service/create", apiController.handleCreateService);
     router.post("/crud-service/delete", apiController.handleDeleteService);
     router.post("/crud-service/update", apiController.handleUpdateService);
+    router.post("/crud-service/lock", apiController.handleLockService);
 
     router.post("/book-service/check", apiController2.checkBookRoom);
     router.post("/book-service/book", apiController2.handleBookService);
@@ -70,6 +72,12 @@ const initApiRoutes = (app) => {
     router.post("/feedback/create", feedbackController.handleCreateFeedback);
 
     router.get("/user-data", apiController3.getUserData);
+
+    router.get("/report-revenue", reportController.handleRevenue);
+
+    router.post("/report-room", reportController.getReportRoom);
+    router.post("/report-service", reportController.getReportService);
+    router.post("/report-all", reportController.getReportAll);
     return app.use("/api", router);
 };
 

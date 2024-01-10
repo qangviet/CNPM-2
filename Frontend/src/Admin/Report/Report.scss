@@ -1,0 +1,76 @@
+.report-count-container {
+    display: flex;
+    flex-direction: row;
+    padding: 15px;
+    margin-top: 20px;
+    // background-color: #a9a9a92e;
+    border-radius: 20px;
+}
+.rp-element-count {
+    // margin: 5px;
+    display: flex;
+    flex-direction: row;
+    .col-1 {
+        text-align: center;
+        .count-number {
+            font-size: 50px;
+            color: #05a15685;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        span {
+            padding: 10px;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+    }
+    .col-2 {
+        .divider {
+            margin: 0px 20px;
+            height: 100px;
+            width: 2px;
+            background-color: #9c9c9c9f;
+        }
+    }
+}
+.rp-chart-container {
+    padding: 20px;
+    margin: 10px;
+    max-width: 1400px;
+    .row-1 {
+        display: flex;
+        flex-direction: row;
+        gap: 50px;
+        height: auto;
+        .chart-container {
+            max-width: 700px;
+            min-width: 700px;
+        }
+    }
+    .row-2 {
+        display: flex;
+        justify-content: center;
+        height: auto;
+        .chart-container {
+            margin-top: 20px;
+            max-width: 1000px;
+            min-width: 1000px;
+        }
+    }
+    .year-picker {
+        margin-right: 10px;
+        text-align: center;
+        select {
+            padding: 10px;
+            border-radius: 10px;
+            background-color: rgb(115, 167, 231);
+            color: white;
+            font-size: 24px;
+            border: none;
+        }
+        select:hover {
+            // background-color: rgba(36, 118, 219, 0.447);
+            cursor: pointer;
+        }
+    }
+}

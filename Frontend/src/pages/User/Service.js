@@ -101,8 +101,12 @@ const Service = () => {
             setModalBook(true);
             setPrice(serviceData[index].price);
             console.log(res.data.DT);
-            let d = getDatesArray(res.data.DT[0].CheckInDate, res.data.DT[0].CheckOutDate);
-            setDateArray(d);
+            let dates = [];
+            for (const r of res.data.DT) {
+                let d = getDatesArray(r.CheckInDate, r.CheckOutDate);
+                dates.push(...d);
+            }
+            setDateArray(dates);
         } else {
             toast.error(res.data.EM);
         }
