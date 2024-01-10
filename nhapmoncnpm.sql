@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 09, 2024 at 05:10 PM
+-- Generation Time: Jan 10, 2024 at 01:18 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -48,7 +48,6 @@ CREATE TABLE `bill` (
   `SH_ID` int(11) DEFAULT NULL,
   `RESERVATION_ID` int(11) DEFAULT NULL,
   `KH_ID` int(11) DEFAULT NULL,
-  `COUPON_ID` varchar(20) DEFAULT NULL,
   `PAYMENT_METHOD` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -56,13 +55,43 @@ CREATE TABLE `bill` (
 -- Dumping data for table `bill`
 --
 
-INSERT INTO `bill` (`ID`, `BILL_ID`, `TOTAL`, `BILL_TIME`, `BILL_STATUS`, `SH_ID`, `RESERVATION_ID`, `KH_ID`, `COUPON_ID`, `PAYMENT_METHOD`) VALUES
-(1, 105, 1000, NULL, 2, NULL, 200, NULL, NULL, NULL),
-(2, 111, 2500, NULL, 0, 3771894, NULL, 70203676, NULL, NULL),
-(3, 112, 1200, NULL, 0, 1704307, NULL, 70203676, NULL, NULL),
-(4, 113, 990, NULL, 0, NULL, 348869, 70203676, NULL, NULL),
-(5, 11926730, 438, '2024-09-01 22:51:28', 2, NULL, 479210, 70479208, NULL, 'Tiền mặt'),
-(6, 75500308, 700, '2024-01-09 22:51:09', 2, NULL, 481527, 70481525, NULL, 'Chuyển khoản');
+INSERT INTO `bill` (`ID`, `BILL_ID`, `TOTAL`, `BILL_TIME`, `BILL_STATUS`, `SH_ID`, `RESERVATION_ID`, `KH_ID`, `PAYMENT_METHOD`) VALUES
+(7, 65217638, 438, '2023-08-01 13:20:15', 2, NULL, 9086983, 111961, 'Chuyển khoản'),
+(8, 65217638, 1400, '2023-08-01 13:20:15', 2, NULL, 9087034, 111961, 'Chuyển khoản'),
+(11, 65217638, 180, '2023-08-01 13:20:15', 2, 7678128, NULL, 111961, 'Chuyển khoản'),
+(12, 65217638, 180, '2023-08-01 13:20:15', 2, 36268, NULL, 111961, 'Chuyển khoản'),
+(13, 65217638, 160, '2023-08-01 13:20:15', 2, 782800, NULL, 111961, 'Chuyển khoản'),
+(14, 65217638, 120, '2023-08-01 13:20:15', 2, 3652561, NULL, 111961, 'Chuyển khoản'),
+(15, 65217638, 160, '2023-08-01 13:20:15', 2, 9993236, NULL, 111961, 'Chuyển khoản'),
+(16, 22800183, 1488, '2023-08-21 13:36:08', 2, NULL, 9156213, 111961, 'Tiền mặt'),
+(17, 22800183, 20, '2023-08-21 13:36:15', 2, 2030175, NULL, 111961, 'Tiền mặt'),
+(18, 44849914, 1552, '2023-08-21 13:25:03', 2, NULL, 9156218, 117569, 'Chuyển khoản'),
+(19, 44849914, 120, '2023-08-21 13:25:03', 2, 3401687, NULL, 117569, 'Chuyển khoản'),
+(20, 44849914, 160, '2023-08-21 13:25:03', 2, 1024836, NULL, 117569, 'Chuyển khoản'),
+(21, 67925659, 1050, '2023-09-29 13:42:03', 2, NULL, 9389585, 130598, 'Tiền mặt'),
+(22, 67925659, 20, '2023-09-29 13:42:03', 2, 6463364, NULL, 130598, 'Tiền mặt'),
+(23, 67925659, 160, '2023-09-29 13:42:03', 2, 2053554, NULL, 130598, 'Tiền mặt'),
+(24, 67925659, 576, '2023-09-29 13:42:03', 2, NULL, 9389597, 130598, 'Tiền mặt'),
+(25, 44495, 1965, '2023-10-31 13:46:55', 2, NULL, 9683391, 134428, 'Tiền mặt'),
+(26, 44495, 1362, '2023-10-31 13:46:55', 2, NULL, 9683392, 134428, 'Tiền mặt'),
+(27, 44495, 240, '2023-10-31 13:46:55', 2, 4101933, NULL, 134428, 'Tiền mặt'),
+(28, 44495, 180, '2023-10-31 13:46:55', 2, 3554887, NULL, 134428, 'Tiền mặt'),
+(29, 44495, 180, '2023-10-31 13:46:55', 2, 9885525, NULL, 134428, 'Tiền mặt'),
+(30, 44495, 20, '2023-10-31 13:46:55', 2, 4201118, NULL, 134428, 'Tiền mặt'),
+(31, 94340673, 2290, '2023-11-29 14:01:48', 2, NULL, 9985833, 142645, 'Tiền mặt'),
+(32, 94340673, 657, '2023-11-29 14:01:51', 2, NULL, 9985834, 142645, 'Tiền mặt'),
+(33, 94340673, 240, '2023-11-30 14:01:45', 2, 6921048, NULL, 142645, 'Tiền mặt'),
+(34, 94340673, 400, '2023-11-30 14:01:43', 2, 3957047, NULL, 142645, 'Tiền mặt'),
+(35, 94340673, 160, '2023-11-30 14:01:40', 2, 9816643, NULL, 142645, 'Tiền mặt'),
+(36, 98147671, 438, '2023-11-30 14:01:37', 2, NULL, 9985867, 159412, 'Tiền mặt'),
+(37, 98147671, 604, '2023-11-29 14:01:53', 2, NULL, 9985868, 159412, 'Tiền mặt'),
+(38, 98147671, 908, '2023-11-29 14:01:33', 2, NULL, 9985869, 159412, 'Tiền mặt'),
+(39, 22468932, 1185, '2023-11-30 14:00:50', 2, NULL, 9985876, 173857, 'Chuyển khoản'),
+(40, 22468932, 948, '2023-11-30 14:00:40', 2, NULL, 9985877, 173857, 'Chuyển khoản'),
+(41, 16617716, 1975, '2023-12-15 14:05:23', 2, NULL, 245098, 175536, 'Tiền mặt'),
+(42, 26858725, 752, '2024-01-15 17:06:26', 2, NULL, 487947, 142645, 'Chuyển khoản'),
+(43, 21587975, 620, '2024-01-10 19:10:27', 2, NULL, 488859, 70203676, 'Chuyển khoản'),
+(44, 21587975, 60, '2024-01-10 19:10:27', 2, 5694700, NULL, 70203676, 'Chuyển khoản');
 
 -- --------------------------------------------------------
 
@@ -90,16 +119,6 @@ CREATE TABLE `feedback` (
   `KH_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `feedback`
---
-
-INSERT INTO `feedback` (`FB_ID`, `FB_TIME`, `FB_RATING`, `FB_TEXT`, `KH_ID`) VALUES
-(645780, '2024-01-09 14:26:40', 4, 'Tôi đã ở khách sạn Hust Stay Smart trong 3 ngày và rất hài lòng với trải nghiệm của mình. Phòng ốc rộng rãi, thoáng mát, và có đầy đủ tiện nghi. Nhân viên phục vụ rất nhiệt tình và chu đáo. Tôi đặc biệt ấn tượng với dịch vụ giặt ủi của khách sạn, rất nhanh chóng và chất lượng.', 70203262),
-(1104010, '2024-01-09 14:27:50', 5, 'Khách sạn Hust Stay Smart là một lựa chọn tuyệt vời cho những ai đang tìm kiếm một nơi lưu trú giá cả phải chăng nhưng vẫn đảm bảo chất lượng. Phòng ốc sạch sẽ, gọn gàng, và nhân viên phục vụ rất thân thiện.', 70203262),
-(3790728, '2024-01-09 14:20:48', 5, 'Tốt', 70203676),
-(4955296, '2024-01-09 22:53:07', 5, 'Phòng và dịch vụ Tốt', 70481525);
-
 -- --------------------------------------------------------
 
 --
@@ -121,14 +140,20 @@ CREATE TABLE `khachhang` (
 --
 
 INSERT INTO `khachhang` (`KH_ID`, `KH_NAME`, `KH_SDT`, `KH_ADDRESS`, `KH_CCCD`, `KH_GIOITINH`, `USER_NAME`) VALUES
-(70203262, 'Trương Việt', '01285185', '', '', 0, 'vietproxh'),
-(70203284, 'Viet', '08128158', '', '', 0, 'qangviet123'),
-(70203285, 'Viet', '01295918', '', '', 0, 'qangviet1234'),
+(103262, 'Trương Việt', '01285185', '142 Bà Triệu, Thành phố Thanh Hóa, Thanh Hóa', '001203014599', 0, 'abcde'),
+(111961, 'Đặng Nguyên Duy', '0357 105 21', '56 Trần Phú, Hội An, Quảng Nam', '001203013290', 0, 'duy'),
+(117569, 'Nguyễn Thị Thúy', '0327 592 43', '145 Thống Nhất, Nha Trang, Khánh Hòa', '001203012870', 1, 'thuy'),
+(130598, 'Đỗ Trần Đại Lộc', '0357 110 13', '15 Thống Nhất, Thành phố Vũng Tàu, Bà Rịa - Vũng Tàu', '001203015955', 0, 'loc'),
+(134428, 'Ngô Duy Kha', '0303 461 61', '104 Ngô Quyền, Ninh Kiều, Cần Thơ', '001203011708', 0, 'kha'),
+(142645, 'Lê Thị Thanh Thùy', '0335 365 06', '23 Bùi Thị Xuân, Đà Lạt, Lâm Đồng', '001203014588', 1, 'abc'),
+(159412, 'Trần Thị Phương', '0303 093 58', '3 Hạ Long, Bãi Cháy, Quảng Ninh', '001203019430', 1, 'phuong'),
+(173857, 'Lê Quốc Khánh', '0314 323 08', '22 Lê Lợi, Thành phố Huế, Thừa Thiên Huế', '001203013796', 0, 'khanh'),
+(175536, 'Võ Nguyễn Đăng Hải', '0367 840 77', '108 Nguyễn Huệ, Quận 1, TP. Hồ Chí Minh', '001203013841', 0, 'linh'),
+(193134, 'Trần Nguyễn Thảo Linh', '0380 069 18', '42 Trần Phú, Ba Đình, Hà Nội', '001203011250', 1, 'hai'),
+(196783, 'Bùi Thị Quỳnh Thư', '0308 193 97', '75 Lê Lợi, Hải Châu, Đà Nẵng', '001203011896', 1, 'thu'),
 (70203676, 'Trương Quang Việt', '0347039025', '206 Đường Nguyễn Du, Quận Hoàn Kiếm, Thành phố Hà Nội', '001203021809', 0, 'abcd'),
-(70234360, 'Trương Quang Việt', '0129519518', '', '', 0, 'viet123456'),
-(70286743, 'Trương Quang Việt', '0345666544', '', '', 0, 'abcdef'),
-(70479208, 'Nguyễn Văn Trí', '03412315169', '', '', 0, 'abcd1234'),
-(70481525, 'Nguyễn Văn A', '01258158', 'số 9999, đường A', '123115', 0, 'abcd12345');
+(70479208, 'Nguyễn Văn Trí', '03412315169', '59 Trần Hưng Đạo, Thành phố Nam Định, Nam Định', '001203021122', 0, 'tri'),
+(70481525, 'Nguyễn Văn An', '01258158', 'số 9999, đường A', '123115', 0, 'an');
 
 -- --------------------------------------------------------
 
@@ -183,13 +208,24 @@ CREATE TABLE `reservation` (
 --
 
 INSERT INTO `reservation` (`RESERVATION_ID`, `CheckInDate`, `CheckOutDate`, `KH_ID`, `ROOM_ID`, `NV_ID`, `RESERVATION_STATUS`, `create_at`) VALUES
-(200, '2024-01-10', '2024-01-13', 70479208, 509, NULL, 1, '2024-01-09 18:27:37'),
-(348869, '2023-12-27', '2023-12-29', 70203676, 109, 19726325, -1, '2023-12-30 09:51:39'),
-(417918, '2024-01-05', '2024-01-07', 70203676, 103, 19726325, 1, '2024-01-02 14:06:20'),
-(417931, '2024-01-04', '2024-01-05', 70203676, 103, 19726325, 1, '2024-01-02 14:08:32'),
-(447057, '2024-01-06', '2024-01-07', 70203676, 205, 19726325, 1, '2024-01-05 23:02:59'),
-(479210, '2024-01-12', '2024-01-14', 70479208, 104, 83423641, 1, '2024-01-09 16:21:49'),
-(481527, '2024-01-12', '2024-01-14', 70481525, 109, 83423641, 1, '2024-01-09 22:47:56');
+(245098, '2023-12-22', '2023-12-27', 175536, 409, 39909190, 1, '2023-12-13 14:03:00'),
+(487947, '2024-01-12', '2024-01-14', 142645, 302, 39909190, 1, '2024-01-10 16:37:59'),
+(488859, '2024-01-12', '2024-01-14', 70203676, 103, 39909190, 1, '2024-01-10 19:09:56'),
+(9086983, '2023-08-04', '2023-08-06', 111961, 104, 83423641, 1, '2023-08-01 13:03:54'),
+(9087034, '2023-08-11', '2023-08-15', 111961, 105, 83423641, 1, '2023-08-01 13:12:22'),
+(9156213, '2023-08-19', '2023-08-22', 111961, 209, 83423641, 1, '2023-08-09 13:22:17'),
+(9156218, '2023-08-16', '2023-08-20', 117569, 203, 83423641, 1, '2023-08-09 13:23:08'),
+(9389585, '2023-09-07', '2023-09-10', 130598, 102, 83423641, 1, '2023-09-05 13:37:38'),
+(9389597, '2023-09-08', '2023-09-10', 130598, 207, 83423641, 1, '2023-09-05 13:39:39'),
+(9683391, '2023-10-10', '2023-10-15', 134428, 310, 39909190, 1, '2023-10-09 13:45:11'),
+(9683392, '2023-10-18', '2023-10-21', 134428, 210, 39909190, 1, '2023-10-09 13:45:21'),
+(9985833, '2023-11-14', '2023-11-19', 142645, 303, 39909190, 1, '2023-11-13 13:52:15'),
+(9985834, '2023-11-23', '2023-11-26', 142645, 104, 39909190, 1, '2023-11-13 13:52:24'),
+(9985867, '2023-11-15', '2023-11-17', 159412, 104, 39909190, 1, '2023-11-13 13:57:52'),
+(9985868, '2023-11-15', '2023-11-17', 159412, 205, 39909190, 1, '2023-11-13 13:58:05'),
+(9985869, '2023-11-15', '2023-11-17', 159412, 210, 39909190, 1, '2023-11-13 13:58:14'),
+(9985876, '2023-11-24', '2023-11-27', 173857, 409, 39909190, 1, '2023-11-13 13:59:23'),
+(9985877, '2023-11-28', '2023-11-30', 173857, 407, 39909190, 1, '2023-11-13 13:59:34');
 
 -- --------------------------------------------------------
 
@@ -273,7 +309,7 @@ CREATE TABLE `service` (
 --
 
 INSERT INTO `service` (`SERVICE_ID`, `SERVICE_NAME`, `SERVICE_PRICE`, `SERVICE_DESC`, `SERVICE_LOCK`) VALUES
-(1, 'Bữa trưa - 1', 60, 'Đặt bữa trưa theo từng mâm (6,7 người/1 mâm) bao gồm các món:\n- Món chính: Thịt gà, thịt bò, thịt lợn, hải sản,...\n- Món phụ: Rau củ, cơm, bún, phở,...\n- Món tráng miệng: Trái cây, chè, bánh ngọt,...', 1),
+(1, 'Bữa trưa - 1', 80, 'Đặt bữa trưa theo từng mâm (6,7 người/1 mâm) bao gồm các món:\n- Món chính: Thịt gà, thịt bò, thịt lợn, hải sản,...\n- Món phụ: Rau củ, cơm, bún, phở,...\n- Món tráng miệng: Trái cây, chè, bánh ngọt,...', 1),
 (2, 'Bữa trưa - 2', 80, 'Đặt bữa trưa theo từng mâm (6,7 người/1 mâm) bao gồm các món:\r\n- Món khai vị: Gỏi, salad, súp,...\r\n- Món chính: Thịt gà, thịt bò, thịt lợn, hải sản,...\r\n- Món phụ: Rau củ, cơm, bún, phở,...\r\n- Món tráng miệng: Trái cây, chè, bánh ngọt,...', 1),
 (3, 'Bữa tối - 1', 60, 'Đặt bữa trưa theo từng mâm (6,7 người/1 mâm) bao gồm các món:\n- Món chính: Thịt gà, thịt bò, thịt lợn, hải sản,...\n- Món phụ: Rau củ, cơm, bún, phở,...\n- Món tráng miệng: Trái cây, chè, bánh ngọt,...', 1),
 (4, 'Bữa tối - 2', 80, 'Đặt bữa trưa theo từng mâm (6,7 người/1 mâm) bao gồm các món:\n- Món khai vị: Gỏi, salad, súp,...\n- Món chính: Thịt gà, thịt bò, thịt lợn, hải sản,...\n- Món phụ: Rau củ, cơm, bún, phở,...\n- Món tráng miệng: Trái cây, chè, bánh ngọt, rượu chè', 1),
@@ -293,23 +329,35 @@ CREATE TABLE `service_history` (
   `DATE` date DEFAULT NULL,
   `TIME` time DEFAULT NULL,
   `TOTAL_PRICE` int(11) NOT NULL,
-  `STATUS` tinyint(4) NOT NULL
+  `STATUS` tinyint(4) NOT NULL,
+  `create_at` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `service_history`
 --
 
-INSERT INTO `service_history` (`SH_ID`, `KH_ID`, `SERVICE_ID`, `QUANTITY`, `DATE`, `TIME`, `TOTAL_PRICE`, `STATUS`) VALUES
-(197940, 70481525, 2, 3, '2024-01-12', '23:48:00', 240, -1),
-(1704307, 70203676, 3, 1, '2024-01-03', '07:48:00', 60, 1),
-(2144915, 70203676, 2, 2, '2024-01-06', '00:20:00', 160, -1),
-(3771894, 70203676, 2, 1, '2024-01-05', '11:16:00', 80, 1),
-(7043074, 70203676, 5, 2, '2024-01-04', '09:49:00', 20, -1),
-(7043366, 70203676, 2, 2, '2024-01-04', '11:50:00', 160, 1),
-(7043371, 70203676, 3, 2, '2024-01-03', '00:58:00', 120, 1),
-(7043418, 70203676, 1, 1, '2024-01-04', '11:16:00', 60, 1),
-(8762617, 70479208, 1, 5, '2024-01-12', '16:29:00', 300, -1);
+INSERT INTO `service_history` (`SH_ID`, `KH_ID`, `SERVICE_ID`, `QUANTITY`, `DATE`, `TIME`, `TOTAL_PRICE`, `STATUS`, `create_at`) VALUES
+(36268, 111961, 1, 3, '2023-08-04', '11:30:00', 180, 1, '2023-08-03 17:18:25'),
+(782800, 111961, 2, 2, '2023-08-11', '11:15:00', 160, 1, '2023-08-05 17:18:25'),
+(1024836, 117569, 4, 2, '2023-08-17', '18:30:00', 160, 1, '2023-08-10 17:18:25'),
+(2030175, 111961, 5, 2, '2023-08-21', '17:22:00', 20, 1, '2023-08-17 17:18:25'),
+(2053554, 130598, 4, 2, '2023-09-08', '18:30:00', 160, 1, '2023-09-02 17:18:25'),
+(3401687, 117569, 3, 2, '2023-08-16', '19:25:00', 120, 1, '2023-08-05 17:18:25'),
+(3554887, 134428, 3, 3, '2023-10-19', '13:46:00', 180, 1, '2023-10-02 17:18:25'),
+(3652561, 111961, 3, 2, '2023-08-12', '19:20:00', 120, 1, '2023-08-08 17:18:25'),
+(3957047, 142645, 2, 5, '2023-11-17', '10:00:00', 400, 1, '2023-11-14 17:18:25'),
+(4101933, 134428, 2, 3, '2023-10-19', '13:46:00', 240, 1, '2023-10-02 17:18:25'),
+(4201118, 134428, 5, 2, '2023-10-14', '13:47:00', 20, 1, '2023-10-02 17:18:25'),
+(5397298, 111961, 2, 2, '2023-08-05', '23:10:00', 160, -1, '2023-08-01 17:18:25'),
+(5694700, 70203676, 1, 1, '2024-01-13', '11:10:00', 60, 1, '2024-01-10 19:10:19'),
+(5893395, 111961, 1, 3, '2023-08-04', '00:00:00', 180, -1, '2023-08-02 17:18:25'),
+(6463364, 130598, 5, 2, '2023-09-07', '11:20:00', 20, 1, '2023-09-05 17:18:25'),
+(6921048, 142645, 2, 3, '2023-11-16', '10:58:00', 240, 1, '2023-11-12 17:18:25'),
+(7678128, 111961, 3, 3, '2023-08-05', '19:20:00', 180, 1, '2023-08-01 17:18:25'),
+(9816643, 142645, 4, 2, '2023-11-18', '19:03:00', 160, 1, '2023-11-13 17:18:25'),
+(9885525, 134428, 3, 3, '2023-10-11', '13:48:00', 180, 1, '2023-10-03 17:18:25'),
+(9993236, 111961, 4, 2, '2023-08-13', '18:30:00', 160, 1, '2023-08-08 17:18:25');
 
 -- --------------------------------------------------------
 
@@ -328,11 +376,19 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`USER_NAME`, `USER_PASS`, `USER_IDENTITY`) VALUES
+('abc', '123', 1),
 ('abcd', '1234', 1),
-('abcd1234', 'abcd1234', 1),
-('abcd12345', '12345', 1),
-('abcdef', '123456', 1),
+('abcde', '12345', 1),
 ('admin', 'admin', 3),
+('an', 'an', 1),
+('duy', 'duy', 1),
+('hai', 'hai', 1),
+('kha', 'kha', 1),
+('khanh', 'khanh', 1),
+('kong', 'kong', 1),
+('linh', 'linh', 1),
+('loc', 'loc', 1),
+('manh', 'manh', 1),
 ('nhanvien1', 'nhanvien1', 2),
 ('nhanvien10', 'nhanvien10', 2),
 ('nhanvien2', 'nhanvien2', 2),
@@ -343,10 +399,13 @@ INSERT INTO `user` (`USER_NAME`, `USER_PASS`, `USER_IDENTITY`) VALUES
 ('nhanvien7', 'nhanvien7', 2),
 ('nhanvien8', 'nhanvien8', 2),
 ('nhanvien9', 'nhanvien9', 2),
-('qangviet123', '1', 1),
-('qangviet1234', 'a', 1),
-('viet123456', '123456', 1),
-('vietproxh', 'a', 1);
+('phuong', 'phuong', 1),
+('quang', 'quang', 1),
+('thu', 'thu', 1),
+('thuy', 'thuy', 1),
+('tri', 'tri', 1),
+('truong', 'truong', 1),
+('viet', 'viet', 1);
 
 --
 -- Indexes for dumped tables
@@ -365,7 +424,6 @@ ALTER TABLE `admin`
 ALTER TABLE `bill`
   ADD PRIMARY KEY (`ID`),
   ADD KEY `SH_ID` (`SH_ID`),
-  ADD KEY `COUPON_ID` (`COUPON_ID`),
   ADD KEY `KH_ID` (`KH_ID`),
   ADD KEY `RESERVATION_ID` (`RESERVATION_ID`);
 
@@ -388,6 +446,7 @@ ALTER TABLE `feedback`
 ALTER TABLE `khachhang`
   ADD PRIMARY KEY (`KH_ID`),
   ADD UNIQUE KEY `USER_NAME` (`USER_NAME`),
+  ADD UNIQUE KEY `USER_NAME_2` (`USER_NAME`),
   ADD KEY `KH_ID` (`KH_ID`);
 
 --
@@ -442,7 +501,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `bill`
 --
 ALTER TABLE `bill`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- Constraints for dumped tables
@@ -459,7 +518,6 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `bill`
   ADD CONSTRAINT `bill_ibfk_1` FOREIGN KEY (`SH_ID`) REFERENCES `service_history` (`SH_ID`) ON DELETE SET NULL,
-  ADD CONSTRAINT `bill_ibfk_2` FOREIGN KEY (`COUPON_ID`) REFERENCES `coupon` (`COUPON_ID`) ON DELETE SET NULL,
   ADD CONSTRAINT `bill_ibfk_3` FOREIGN KEY (`KH_ID`) REFERENCES `khachhang` (`KH_ID`) ON DELETE SET NULL,
   ADD CONSTRAINT `bill_ibfk_4` FOREIGN KEY (`RESERVATION_ID`) REFERENCES `reservation` (`RESERVATION_ID`) ON DELETE SET NULL;
 
