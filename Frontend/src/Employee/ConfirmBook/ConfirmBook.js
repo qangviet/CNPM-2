@@ -240,18 +240,7 @@ const ConfirmBook = () => {
             </Modal>
             <div className="ad-header-mngroom">
                 <h3>Danh sách chờ xử lý</h3>
-                <div className="ad-wrap-container">
-                    <div className="search">
-                        <input
-                            type="text"
-                            className="searchTerm"
-                            placeholder="What are you looking for?"
-                        />
-                        <button type="submit" class="searchButton">
-                            <i className="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
+                <div className="ad-wrap-container"></div>
             </div>
             <div className="ad-table-room">
                 <table className="zui-table zui-table-horizontal zui-table-highlight">

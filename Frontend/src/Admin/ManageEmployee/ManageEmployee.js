@@ -410,16 +410,6 @@ const ManageEmployee = () => {
                 <div className="ad-header-mngroom">
                     <h3>Quản lý nhân viên</h3>
                     <div className="ad-wrap-container">
-                        <div className="search">
-                            <input
-                                type="text"
-                                className="searchTerm"
-                                placeholder="What are you looking for?"
-                            />
-                            <button type="submit" class="searchButton">
-                                <i className="fa fa-search"></i>
-                            </button>
-                        </div>
                         <button className="btn-ad-create" onClick={openModalCreate}>
                             <i
                                 class="fa fa-plus"

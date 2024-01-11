@@ -460,16 +460,6 @@ const ManageRoom = () => {
             <div className="ad-header-mngroom">
                 <h3>Quản lý phòng</h3>
                 <div className="ad-wrap-container">
-                    <div className="search">
-                        <input
-                            type="text"
-                            className="searchTerm"
-                            placeholder="What are you looking for?"
-                        />
-                        <button type="submit" class="searchButton">
-                            <i className="fa fa-search"></i>
-                        </button>
-                    </div>
                     <button className="btn-ad-create" onClick={() => openFormCreate()}>
                         <i class="fa fa-plus" aria-hidden="true" style={{ margin: "0px 5px" }}></i>
                         Thêm

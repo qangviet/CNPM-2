@@ -35,28 +35,11 @@ const ManageUser = () => {
         getUserData();
     }, [effect]);
 
-    const [idSearch, setIdSearch] = useState(0);
-
-    const handleSearch = () => {};
-
     return (
         <>
             <div className="ad-header-mngroom">
                 <h3>Quản lý nhân viên</h3>
-                <div className="ad-wrap-container">
-                    <div className="search">
-                        <input
-                            type="number"
-                            className="searchTerm"
-                            placeholder="Nhập ID của khách hàng"
-                            value={idSearch ? idSearch : ""}
-                            onChange={(e) => setIdSearch(e.target.value)}
-                        />
-                        <button type="submit" class="searchButton" onClick={handleSearch}>
-                            <i className="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
+                <div className="ad-wrap-container"></div>
             </div>
             <div className="ad-table-room">
                 <table className="zui-table zui-table-horizontal zui-table-highlight">
