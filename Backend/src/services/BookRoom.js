@@ -10,9 +10,13 @@ const generateID = () => {
 
 const allBookRoom = async () => {
     try {
-        const [r, f] = await connection.query(`select * 
-        from reservation rs join room r on r.ROOM_ID = rs.ROOM_ID
-        order by create_at desc`);
+        const [r, f] = await connection.query(
+            `select * 
+            from reservation rs 
+            join room r on r.ROOM_ID = rs.ROOM_ID
+            join khachhang kh on rs.KH_ID = kh.KH_ID
+            order by CheckInDate asc    `
+        );
         return {
             EM: "",
             EC: "0",
@@ -195,6 +199,34 @@ const bookHistory = async (data) => {
     }
 };
 
+const cancelBookRoom = async (data) => {
+    try {
+        await connection.query(
+            `delete from bill
+            where RESERVATION_ID = ?`,
+            [data.rsID]
+        );
+        await connection.query(
+            `update reservation
+            set RESERVATION_STATUS = -1
+            where RESERVATION_ID = ?`,
+            [data.rsID]
+        );
+        return {
+            EM: "Hủy lịch đặt phòng thành công!",
+            EC: "0",
+            DT: "",
+        };
+    } catch (error) {
+        console.log(error);
+        return {
+            EM: "database error",
+            EC: "-1",
+            DT: "",
+        };
+    }
+};
+
 module.exports = {
     emptyRoom,
     createBookDetails,
@@ -203,4 +235,5 @@ module.exports = {
     declineBook,
     bookHistory,
     allBookRoom,
+    cancelBookRoom,
 };

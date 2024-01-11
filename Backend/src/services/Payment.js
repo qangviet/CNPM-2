@@ -327,6 +327,47 @@ const confirmBill = async (data) => {
     }
 };
 
+const allBill = async () => {
+    try {
+        let [r1, f1] = await connection.query(
+            `select BILL_ID from bill
+            where BILL_STATUS = 2`
+        );
+        let data = [];
+        for (const r of r1) {
+            let [r2, f2] = await connection.query(
+                `SELECT *
+                FROM bill b
+                LEFT JOIN reservation res ON res.RESERVATION_ID = b.RESERVATION_ID
+                LEFT JOIN service_history sh ON sh.SH_ID = b.SH_ID
+                JOIN khachhang kh ON kh.KH_ID = b.KH_ID
+                WHERE 
+                    BILL_STATUS = 2
+                    AND BILL_ID = ?
+                ORDER BY 
+                    BILL_TIME DESC`,
+                [r.BILL_ID]
+            );
+            data.push({
+                id: r.BILL_ID,
+                info: r2,
+            });
+        }
+        return {
+            EM: "",
+            EC: "0",
+            DT: data,
+        };
+    } catch (error) {
+        console.log(error);
+        return {
+            EM: "database is error",
+            EC: "-1",
+            DT: "",
+        };
+    }
+};
+
 module.exports = {
     infoUser,
     billDataById,
@@ -336,4 +377,5 @@ module.exports = {
     confirmBill,
     userPay,
     billDataEmployee,
+    allBill,
 };

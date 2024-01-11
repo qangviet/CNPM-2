@@ -41,6 +41,8 @@ const initApiRoutes = (app) => {
     router.post("/confirm-book", apiController.handleConfirmBook);
     router.get("/book-data", apiController.getBookData);
     router.post("/decline-book", apiController.handleDeclineBook);
+    router.post("/cancel-book", apiController.handleCancelBook);
+
     router.post("/book-history", apiController.getBookHistory);
     router.get("/all-book-history", apiController.getAllBookRoom);
     router.get("/crud-service/read", apiController.getServiceData);
@@ -48,6 +50,8 @@ const initApiRoutes = (app) => {
     router.post("/crud-service/delete", apiController.handleDeleteService);
     router.post("/crud-service/update", apiController.handleUpdateService);
     router.post("/crud-service/lock", apiController.handleLockService);
+
+    router.get("/all-book-service", apiController2.getAllBookService);
 
     router.post("/book-service/check", apiController2.checkBookRoom);
     router.post("/book-service/book", apiController2.handleBookService);
@@ -62,6 +66,8 @@ const initApiRoutes = (app) => {
     router.post("/payment/cancel-bill", apiController2.handleCancelBill);
     router.post("/payment/confirm-bill", apiController2.handleConfirmBill);
     router.get("/payment/bill-data-employee", apiController2.getBillDataEmployee);
+
+    router.get("/payment/all-data", apiController2.getAllBillData);
 
     router.get("/crud-employee/read", apiController3.getEmployee);
     router.post("/crud-employee/update", apiController3.handleUpdateEmployee);

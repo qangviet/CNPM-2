@@ -8,13 +8,12 @@ export default function Sidebar() {
                 <span className="sidebarTitle">SERVICES</span>
                 <img
                     className="sidebarImg"
-                    src="https://grandecentrepointterminal21.com/upload/fitness/02-fitness.jpg?v=50"
+                    src={`${process.env.PUBLIC_URL}/Images/Background/sidebarImg.jpg`}
                     alt=""
                 />
                 <p>
-                    The fully equipped fitness center has a large exercise area with many
-                    Star Trac cardiovascular machines, weight stations, and other
-                    amenities.
+                    The fully equipped fitness center has a large exercise area with many Star Trac
+                    cardiovascular machines, weight stations, and other amenities.
                 </p>
             </div>
 

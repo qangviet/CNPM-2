@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
-import Homes from "../pages/Homes";
-import Rooms from "../pages/Rooms";
-import Login from "../pages/login/Login";
-import Register from "../pages/register/Register";
-import Topbar from "../topbar/topbar";
+import Homes from "../Home/Homes";
+import Rooms from "../BookRoom/Rooms";
+import Login from "../Login/Login";
+import Register from "../Register/Register";
+import Topbar from "../Home/topbar/topbar";
 import NotFound from "../NotFound/NotFound";
-import Feedback from "../pages/Feedback/Feedback";
+import Feedback from "../Feedback/Feedback";
 const GuestRoutes = () => {
     return (
         <Router>

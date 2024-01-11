@@ -1,10 +1,9 @@
 import React from "react";
 import "./Home.css";
-import Header from "../Header/Header";
-import Posts from "../Features Room/Featureroom";
-import Sidebar from "../sidebar/Sidebar";
-import Topbar from "../topbar/topbar";
-import { useState, useEffect } from "react";
+import Header from "./Header/Header";
+import Posts from "./Features Room/Featureroom";
+import Sidebar from "./sidebar/Sidebar";
+import Facility from "../Home/Facilities";
 
 export default function Homes() {
     return (
@@ -14,6 +13,7 @@ export default function Homes() {
                 <Posts />
                 <Sidebar />
             </div>
+            <Facility></Facility>
         </>
     );
 }

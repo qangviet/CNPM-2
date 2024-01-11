@@ -1,4 +1,10 @@
-import { getDate, bookService, history, cancelService } from "../services/BookService";
+import {
+    getDate,
+    bookService,
+    history,
+    cancelService,
+    allBookService,
+} from "../services/BookService";
 import {
     infoUser,
     billDataById,
@@ -8,6 +14,7 @@ import {
     confirmBill,
     userPay,
     billDataEmployee,
+    allBill,
 } from "../services/Payment";
 const checkBookRoom = async (req, res) => {
     try {
@@ -225,6 +232,42 @@ const getInfoUser = async (req, res) => {
     }
 };
 
+const getAllBookService = async (req, res) => {
+    try {
+        let data = await allBookService();
+        return res.status(200).json({
+            EM: data.EM,
+            EC: data.EC,
+            DT: data.DT,
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            EM: "error from server",
+            EC: "-1",
+            DT: "",
+        });
+    }
+};
+
+const getAllBillData = async (req, res) => {
+    try {
+        let data = await allBill();
+        return res.status(200).json({
+            EM: data.EM,
+            EC: data.EC,
+            DT: data.DT,
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            EM: "error from server",
+            EC: "-1",
+            DT: "",
+        });
+    }
+};
+
 module.exports = {
     checkBookRoom,
     handleBookService,
@@ -238,4 +281,6 @@ module.exports = {
     handleUserPay,
     getBillDataEmployee,
     getInfoUser,
+    getAllBookService,
+    getAllBillData,
 };

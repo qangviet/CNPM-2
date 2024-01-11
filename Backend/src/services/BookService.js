@@ -130,9 +130,34 @@ const cancelService = async (data) => {
     }
 };
 
+const allBookService = async () => {
+    try {
+        let [r, f] = await connection.query(
+            `select * 
+            from service_history sh
+            join service s on sh.SERVICE_ID = s.SERVICE_ID
+            join khachhang kh on sh.KH_ID = kh.KH_ID
+            order by DATE asc, TIME asc`
+        );
+        return {
+            EM: "",
+            EC: "0",
+            DT: r,
+        };
+    } catch (error) {
+        console.log(error);
+        return {
+            EM: "database is error",
+            EC: "-1",
+            DT: "",
+        };
+    }
+};
+
 module.exports = {
     getDate,
     bookService,
     history,
     cancelService,
+    allBookService,
 };
