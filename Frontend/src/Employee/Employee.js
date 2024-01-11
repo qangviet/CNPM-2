@@ -66,7 +66,7 @@ const Admin = () => {
                                 isHistoryService: true,
                             }));
                         }}
-                        className={choice.isHistoryRoom ? "ad-sidebar-choice" : ""}
+                        className={choice.isHistoryService ? "ad-sidebar-choice" : ""}
                     >
                         Lịch sử đặt dịch vụ
                     </div>

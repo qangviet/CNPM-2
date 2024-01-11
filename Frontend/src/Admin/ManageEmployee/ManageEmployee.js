@@ -231,7 +231,15 @@ const ManageEmployee = () => {
                             type="number"
                             placeholder="ID"
                             value={id}
-                            onChange={(e) => setId(e.target.value)}
+                            min="0"
+                            onChange={(e) => {
+                                const inputValue = e.target.value;
+                                if (inputValue < 0) {
+                                    e.preventDefault();
+                                    return;
+                                }
+                                setId(inputValue);
+                            }}
                         ></input>
                     </div>
                     <div className="element-form">
@@ -327,7 +335,13 @@ const ManageEmployee = () => {
                             type="number"
                             placeholder="ID"
                             value={id}
-                            onChange={(e) => setId(e.target.value)}
+                            onChange={(e) => {
+                                if (e.target.value < 0) {
+                                    e.preventDefault();
+                                    return;
+                                }
+                                setId(e.target.value);
+                            }}
                         ></input>
                     </div>
                     <div className="element-form">
@@ -443,6 +457,7 @@ const ManageEmployee = () => {
                                     <td>
                                         <button className="ad-btn-action">
                                             <img
+                                                alt=""
                                                 src={`${process.env.PUBLIC_URL}/Images/Icon/pencil.png`}
                                                 style={{
                                                     width: "20px",
@@ -454,6 +469,7 @@ const ManageEmployee = () => {
                                         </button>
                                         <button className="ad-btn-action">
                                             <img
+                                                alt=""
                                                 src={`${process.env.PUBLIC_URL}/Images/Icon/bin.png`}
                                                 style={{
                                                     width: "20px",

@@ -311,10 +311,16 @@ const ManageRoom = () => {
                 <div className="element-form">
                     <label>ID: </label>
                     <input
-                        type="text"
+                        type="number"
                         placeholder="ID"
                         value={ID}
-                        onChange={(e) => setID(e.target.value)}
+                        onChange={(e) => {
+                            if (e.target.value < 0) {
+                                e.preventDefault();
+                                return;
+                            }
+                            setID(e.target.value);
+                        }}
                     ></input>
                 </div>
                 <div className="element-form">
@@ -332,7 +338,13 @@ const ManageRoom = () => {
                         type="number"
                         placeholder="Giá"
                         value={price}
-                        onChange={(e) => setPrice(e.target.value)}
+                        onChange={(e) => {
+                            if (e.target.value < 0) {
+                                e.preventDefault();
+                                return;
+                            }
+                            setPrice(e.target.value);
+                        }}
                     ></input>
                 </div>
                 <div className="element-form">
@@ -410,7 +422,13 @@ const ManageRoom = () => {
                         type="number"
                         placeholder="Giá"
                         value={price}
-                        onChange={(e) => setPrice(e.target.value)}
+                        onChange={(e) => {
+                            if (e.target.value < 0) {
+                                e.preventDefault();
+                                return;
+                            }
+                            setPrice(e.target.value);
+                        }}
                     ></input>
                 </div>
                 <div className="element-form">
@@ -493,6 +511,7 @@ const ManageRoom = () => {
                                         onClick={() => openModalEdit(index)}
                                     >
                                         <img
+                                            alt=""
                                             src={`${process.env.PUBLIC_URL}/Images/Icon/pencil.png`}
                                             style={{
                                                 width: "20px",
@@ -506,6 +525,7 @@ const ManageRoom = () => {
                                         onClick={() => openModalDelete(index)}
                                     >
                                         <img
+                                            alt=""
                                             src={`${process.env.PUBLIC_URL}/Images/Icon/bin.png`}
                                             style={{
                                                 width: "20px",
@@ -519,6 +539,7 @@ const ManageRoom = () => {
                                         onClick={() => openModalLock(index)}
                                     >
                                         <img
+                                            alt=""
                                             src={`${process.env.PUBLIC_URL}/Images/Icon/padlock.png`}
                                             style={{
                                                 width: "20px",

@@ -43,6 +43,13 @@ const Profile = () => {
             toast.error("Vui lòng nhập số điện thoại !");
             return;
         }
+        if (phone) {
+            const regexCheck = /^(\d{4}\s\d{3}\s\d{3}|\d{10}|\d{3}\s\d{3}\s\d{4})$/;
+            if (!regexCheck.test(phone)) {
+                toast.error("Số điện thoại không hợp lệ !");
+                return;
+            }
+        }
         if (!address) {
             toast.error("Vui lòng nhập địa chỉ !");
             return;
@@ -50,6 +57,13 @@ const Profile = () => {
         if (!CCCD) {
             toast.error("Vui lòng nhập căn cước công dân !");
             return;
+        }
+        if (CCCD) {
+            const regexCheck = /^\d{12}$/;
+            if (!regexCheck.test(CCCD)) {
+                toast.error("CCCD không hợp lệ");
+                return;
+            }
         }
         if (!gender) {
             toast.error("Vui lòng chọn giới tính !");

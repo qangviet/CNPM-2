@@ -242,14 +242,20 @@ const ManageService = () => {
                 style={customStyles}
                 contentLabel="Thêm dịch vụ"
             >
-                <h3>Thêm phòng</h3>
+                <h3>Thêm dịch vụ</h3>
                 <div className="element-form">
                     <label>ID: </label>
                     <input
                         type="number"
                         placeholder="ID"
                         value={id}
-                        onChange={(e) => setId(e.target.value)}
+                        onChange={(e) => {
+                            if (e.target.value < 0) {
+                                e.preventDefault();
+                                return;
+                            }
+                            setId(e.target.value);
+                        }}
                     ></input>
                 </div>
                 <div className="element-form">
@@ -267,7 +273,13 @@ const ManageService = () => {
                         type="number"
                         placeholder="Giá"
                         value={price}
-                        onChange={(e) => setPrice(e.target.value)}
+                        onChange={(e) => {
+                            if (e.target.value < 0) {
+                                e.preventDefault();
+                                return;
+                            }
+                            setPrice(e.target.value);
+                        }}
                     ></input>
                 </div>
                 <div className="element-form">
@@ -319,7 +331,13 @@ const ManageService = () => {
                         placeholder="ID"
                         value={id}
                         disabled
-                        onChange={(e) => setId(e.target.value)}
+                        onChange={(e) => {
+                            if (e.target.value < 0) {
+                                e.preventDefault();
+                                return;
+                            }
+                            setId(e.target.value);
+                        }}
                     ></input>
                 </div>
                 <div className="element-form">
@@ -337,7 +355,13 @@ const ManageService = () => {
                         type="number"
                         placeholder="Giá"
                         value={price}
-                        onChange={(e) => setPrice(e.target.value)}
+                        onChange={(e) => {
+                            if (e.target.value < 0) {
+                                e.preventDefault();
+                                return;
+                            }
+                            setPrice(e.target.value);
+                        }}
                     ></input>
                 </div>
                 <div className="element-form">

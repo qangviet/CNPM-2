@@ -183,7 +183,14 @@ const Service = () => {
                         type="number"
                         placeholder="Số lượng"
                         value={quantity}
-                        onChange={(e) => setQuantity(e.target.value)}
+                        min="0"
+                        onChange={(e) => {
+                            if (e.target.value < 0) {
+                                e.preventDefault();
+                                return;
+                            }
+                            setQuantity(e.target.value);
+                        }}
                     ></input>
                 </div>
                 <div className="element-form">
