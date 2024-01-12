@@ -23,6 +23,13 @@ export default function Register() {
             toast.error("Phone is required");
             return false;
         }
+        if (phone) {
+            const regexCheck = /^(\d{4}\s\d{3}\s\d{3}|\d{10}|\d{3}\s\d{3}\s\d{4})$/;
+            if (!regexCheck.test(phone)) {
+                toast.error("Phone is invalid!");
+                return;
+            }
+        }
         if (!username) {
             toast.error("Username is required");
             return false;
@@ -35,7 +42,6 @@ export default function Register() {
             toast.error("Your password is not the same");
             return false;
         }
-
         return true;
     };
 

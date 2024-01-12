@@ -3,6 +3,7 @@ import "./Room.scss"; // Import the CSS file
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import Modal from "react-modal";
 
 const Rooms = () => {
     const navigate = useNavigate();
@@ -11,7 +12,7 @@ const Rooms = () => {
     const [checkIn, setCheckIn] = useState("");
     const [checkOut, setCheckOut] = useState("");
 
-    const [selectedRoom, setSelectedRoom] = useState(null);
+    const [selectedRoom, setSelectedRoom] = useState(-1);
 
     const [totalPrice, setTotalPrice] = useState(0);
 
@@ -43,7 +44,7 @@ const Rooms = () => {
                     rdata.push({
                         id: r.ROOM_ID,
                         type: r.ROOM_TYPE,
-                        price: "$" + r.ROOM_PRICE.toString() + " per night",
+                        price: r.ROOM_PRICE,
                         image: `${process.env.PUBLIC_URL}/Images/Rooms/${r.ROOM_ID}.jpg`,
                         desc: r.ROOM_DESC,
                     });
@@ -55,35 +56,28 @@ const Rooms = () => {
         }
     };
 
-    const openEditModal = (roomIndex) => {
-        setSelectedRoom(roomIndex);
-        const dialog = document.getElementById("roomModal");
-        if (dialog) {
-            dialog.showModal();
-        }
-        calculateTotalPrice();
+    const customStyles = {
+        content: {
+            top: "50%",
+            left: " 50%",
+            right: "auto",
+            bottom: "auto",
+            marginRight: "-50%",
+            transform: "translate(-50%, -50%)",
+        },
     };
 
-    const closeEditModal = () => {
-        setSelectedRoom(null);
-        const dialog = document.getElementById("roomModal");
-        if (dialog) {
-            dialog.close();
-        }
-    };
+    const [modalDetails, setModalDetails] = useState(false);
 
-    const renderRoomDetails = () => {
-        if (selectedRoom) {
-            return (
-                <div>
-                    <h3>Thông tin chi tiết phòng</h3>
-                    <p className="fixed-box-text">{roomData[selectedRoom].desc}</p>
-                </div>
-            );
-        }
-        return null;
+    const openModalDetails = (index) => {
+        setSelectedRoom(index);
+        calculateTotalPrice(roomData[index].price);
+        setModalDetails(true);
     };
-
+    const cloesModalDetails = () => {
+        setSelectedRoom(-1);
+        setModalDetails(false);
+    };
     const handleBookNow = async () => {
         if (!sessionStorage.getItem("account")) {
             alert("Hãy đăng nhập trước khi đặt phòng!");
@@ -108,15 +102,14 @@ const Rooms = () => {
         }
     };
 
-    const calculateTotalPrice = () => {
-        if (checkIn && checkOut && selectedRoom) {
+    const calculateTotalPrice = (price) => {
+        if (checkIn && checkOut) {
             const startDate = new Date(checkIn);
             const endDate = new Date(checkOut);
             const timeDifference = endDate.getTime() - startDate.getTime();
             const duration = Math.ceil(timeDifference / (1000 * 3600 * 24));
 
-            const roomPrice = parseInt(roomData[selectedRoom].price.replace(/\D/g, ""));
-            const totalPrice = duration * roomPrice;
+            const totalPrice = duration * price;
 
             setTotalPrice(totalPrice);
         }
@@ -157,15 +150,23 @@ const Rooms = () => {
                     <div className="room-card" key={room.id} id={`room-${room.id}`}>
                         <img src={room.image} alt={room.type} />
                         <h3> {`${room.id}. ${room.type}`}</h3>
-                        <p className="price">{room.price}</p>
-                        <button className="button-viewdetails" onClick={() => openEditModal(index)}>
+                        <p className="price">{"$" + room.price.toString() + " per night"}</p>
+                        <button
+                            className="button-viewdetails"
+                            onClick={() => openModalDetails(index)}
+                        >
                             Xem chi tiết
                         </button>
                     </div>
                 ))}
             </div>
-            {selectedRoom && (
-                <dialog id="roomModal">
+            <Modal
+                isOpen={modalDetails}
+                onRequestClose={cloesModalDetails}
+                style={customStyles}
+                contentLabel="Xem chi tiết"
+            >
+                {modalDetails && (
                     <div className="room-details">
                         <h2> {`${roomData[selectedRoom].id}. ${roomData[selectedRoom].type}`}</h2>
                         <img
@@ -173,8 +174,10 @@ const Rooms = () => {
                             alt={roomData[selectedRoom].type}
                             className="small-image"
                         />
-                        <p className="price">{roomData[selectedRoom].price}</p>
-                        {renderRoomDetails()}
+                        <div>
+                            <h3>Thông tin chi tiết phòng</h3>
+                            <p className="fixed-box-text">{roomData[selectedRoom].desc}</p>
+                        </div>
                         <div style={{ color: "red", fontWeight: "bold", fontSize: "24px" }}>
                             Tổng tiền: {totalPrice} $
                         </div>
@@ -182,13 +185,13 @@ const Rooms = () => {
                             <button className="btn-book" onClick={handleBookNow}>
                                 Book Now
                             </button>
-                            <button className="btn-close" onClick={closeEditModal}>
+                            <button className="btn-close" onClick={cloesModalDetails}>
                                 Close
                             </button>
                         </div>
                     </div>
-                </dialog>
-            )}
+                )}
+            </Modal>
         </div>
     );
 };
