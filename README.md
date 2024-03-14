@@ -12,14 +12,4 @@ Mở XAMPP, tải và import file [nhapmoncnpm.sql](https://github.com/qangviet/
 Clone code 
 
 ## Bước 4:
-Mở 2 tab VSCode 1 tab mở thư mục front-end 1 tab mở thư mục back-end
-
-## Bước 5:
-Với lần đầu tiên chạy cần tải các thư viện.
- 
-Chạy câu lệnh: ```npm install``` với cả 2 tab ở **`Teminal`**
-
-## Bước 6: 
-Chạy câu lệnh: ``npm start`` với cả 2 tab ở **`Teminal`**
-
-## Bước 7: TEST
+Chạy câu lệnh: ```npm install``` với cả 2 thư mục Frontend và Backend
